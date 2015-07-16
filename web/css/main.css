@@ -1,0 +1,27 @@
+html, body {
+  font-family: PT Sans Narrow; }
+
+body > .container {
+  padding-top: 60px; }
+
+body .wrap > nav {
+  opacity: 1.1; }
+
+body > footer {
+  border-top: 1px solid #bababa;
+  color: #bababa;
+  margin-top: 25px;
+  padding-top: 25px; }
+  body > footer a {
+    color: #bababa;
+    transition: color 0.75s; }
+    body > footer a:hover {
+      color: gray;
+      text-decoration: none; }
+  body > footer .social {
+    font-size: 14px;
+    text-align: right; }
+    body > footer .social i {
+      font-size: 18px; }
+
+/*# sourceMappingURL=main.css.map */

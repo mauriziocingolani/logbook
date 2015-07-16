@@ -1,0 +1,34 @@
+{
+    "name": "mauriziocingolani/logbook",
+    "description": "Yii2 Log Application",
+    "authors": [
+        {
+            "name": "Maurizio Cingolani",
+            "email": "mauriziocingolani74@gmail.com"
+        }
+    ],
+    "keywords": ["yii2", "log", "application"],
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "2.0.5",
+        "yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*",
+        "yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-jui": "*",
+        "mauriziocingolani/yii2-fmwk-php": "1.0.*",
+        "mauriziocingolani/yii2-fmwk-twitter": "1.0.*"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}
