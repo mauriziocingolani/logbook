@@ -11,7 +11,7 @@ $config->addDbComponent();
 $config->addSessionComponent(['timeout' => 14400]);
 //$config->addTwitterComponent();
 $config->addUserComponent();
-//$config->addUserModule();
+$config->addUserModule();
 $config->version = 'RC1';
 if (YII_DEBUG)
     $config->enableGii(['82.85.62.218']);

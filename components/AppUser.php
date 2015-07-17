@@ -11,8 +11,8 @@ use yii\web\User;
  */
 class AppUser extends User {
 
-//    public function isDeveloper() {
-//        return Yii::$app->user->identity->RoleID == 1;
-//    }
+    public function isDeveloper() {
+        return Yii::$app->user->identity->RoleID == 1;
+    }
 
 }
