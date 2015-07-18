@@ -5,6 +5,7 @@ namespace app\modules\user\controllers;
 use Yii;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\User;
+use app\modules\user\models\UserSearch;
 use app\modules\user\models\Login;
 use app\modules\user\models\Role;
 use mauriziocingolani\yii2fmwkphp\Controller;
@@ -16,6 +17,12 @@ class DefaultController extends Controller {
                     [ 'allow' => true,
                         'roles' => ['@'],
                         'actions' => ['logout'],
+                    ],
+                    [ 'allow' => true,
+                        'actions' => [ 'users', 'user'],
+                        'matchCallback' => function() {
+                    return Yii::$app->user->isDeveloper();
+                },
                     ],
                     ['allow' => true,
                         'roles' => ['?'],
@@ -45,6 +52,15 @@ class DefaultController extends Controller {
         Yii::$app->user->logout();
         Login::RegisterLogout($id);
         $this->goHome();
+    }
+
+    public function actionUsers() {
+        $searchModel = new UserSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+        return $this->render('users', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
     }
 
 }

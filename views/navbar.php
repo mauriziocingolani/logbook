@@ -31,14 +31,14 @@ use yii\helpers\Url;
 //        ];
         $userSubitems = [];
         if (Yii::$app->user->isDeveloper()) :
-//            $userSubitems[] = ['label' => '<i class="fa fa-group"></i> Utenti', 'url' => ['/utenti']];
-//            $userSubitems[] = '<li class="divider"></li>';
+            $userSubitems[] = ['label' => '<i class="fa fa-group"></i> Utenti', 'url' => ['/utenti']];
+            $userSubitems[] = '<li class="divider"></li>';
         endif;
 //                $userSubitems[] = ['label' => '<i class="fa fa-info-circle"></i> Profilo', 'url' => ['#']];
 //                $userSubitems[] = ['label' => '<i class="fa fa-list"></i> Ruoli', 'url' => ['/utenti/ruoli']];
         $userSubitems[] = ['label' => '<i class="fa fa-power-off"></i> Logout', 'url' => Url::to(['/logout'])];
         $items[] = [
-            'label' => '<i class="fa fa-user"></i> ' . Yii::$app->user->identity->Name,
+            'label' => '<i class="fa fa-at"></i> ' . Yii::$app->user->identity->Name,
             'items' => $userSubitems];
     endif;
     echo Nav::widget([

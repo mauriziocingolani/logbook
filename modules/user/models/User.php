@@ -22,6 +22,14 @@ use mauriziocingolani\yii2fmwkphp\NamedActiveRecord;
  */
 class User extends NamedActiveRecord implements IdentityInterface {
 
+    public function attributeLabels() {
+        return [
+            'UserID' => '#',
+            'UserName' => 'Nome utente',
+            'Email' => 'Email',
+        ];
+    }
+
     public function rules() {
         return [
             ['UserName', 'required', 'message' => 'Inserisci il nome utente'],
