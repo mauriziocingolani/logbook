@@ -20,12 +20,18 @@ GridView::widget([
     'filterModel' => $searchModel,
     'columns' => [
         'UserID',
-        'UserName',
+        [
+            'attribute' => 'UserName',
+            'format' => 'raw',
+            'value' => function ($data) {
+                return Html::a($data->UserName, '/utenti/' . $data->UserName);
+            },
+        ],
         'Email',
         [
             'attribute' => 'role',
             'value' => 'role.Description',
-            'label'=>'Ruolo',
+            'label' => 'Ruolo',
         ],
     ],
     'emptyText' => 'Nessun utente trovato',

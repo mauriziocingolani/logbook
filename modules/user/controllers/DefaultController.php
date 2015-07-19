@@ -62,5 +62,31 @@ class DefaultController extends Controller {
                     'dataProvider' => $dataProvider,
         ]);
     }
+    
+        public function actionUser($username = null) {
+        $model = new User;
+        if (Yii::$app->getRequest()->isPost) :
+//            $model->setAttributes(Yii::$app->getRequest()->post('User'));
+//            $model->RoleID = Role::ROLE_GUEST;
+//            $password = substr(sha1(time()), 0, 10);
+//            $model->Password = base64_encode(Yii::$app->getSecurity()->encryptByKey($password, Yii::$app->params['encryption_key']));
+//            try {
+//                if ($model->save()) :
+//                    Yii::$app->mailer->compose('new-account', ['username' => $model->UserName, 'password' => $password])->
+//                            setFrom('webadmin@mastersida.info')->
+//                            setTo($model->getAttribute('Email'))->
+//                            setBcc('m.cingolani@ggfgroup.it')->
+//                            setSubject('Master SIDA - Account per accesso Gestionale Almalaurea')->
+//                            send();
+//                    Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $model->getAttribute('Email') . '.');
+//                else :
+//                    Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.');
+//                endif;
+//            } catch (yii\db\Exception $e) {
+//                Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
+//            }
+        endif;
+        return $this->render('user', ['model' => $model]);
+    }
 
 }
