@@ -11,7 +11,7 @@ $this->title = $this->addBreadcrumb('Utenti');
 <h1>Utenti</h1>
 
 <p>
-    <?= Html::faa('plus-circle', 'Nuovo utente', ['/utenti/nuovo'], ['class' => 'btn btn-primary']); ?>
+    <?= Html::faa('plus', 'Nuovo utente', ['/utenti/nuovo'], ['class' => 'btn btn-default']); ?>
 </p>
 
 <?=

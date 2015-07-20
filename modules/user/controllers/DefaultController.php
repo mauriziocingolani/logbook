@@ -93,12 +93,13 @@ class DefaultController extends Controller {
                         return $this->redirect('/utenti/' . $model->UserName);
                     else :
                         Yii::$app->session->setFlash('success', 'Utente modificato!');
+                        $this->refresh();
                     endif;
                 else :
-                    Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.');
+                    Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.');
                 endif;
             } catch (yii\db\Exception $e) {
-                Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
+                Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
             }
         endif;
         return $this->render('user', ['model' => $model]);

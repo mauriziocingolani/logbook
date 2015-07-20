@@ -41,6 +41,7 @@ class User extends NamedActiveRecord implements IdentityInterface {
         return [
             ['RoleID', 'required'],
             ['UserName', 'required', 'message' => 'Inserisci il nome utente'],
+            ['UserName', 'compare', 'compareValue' => 'nuovo', 'operator' => '!=', 'message' => 'Nome utente non consentito'],
             ['Email', 'required', 'message' => 'Inserisci l\'indirizzo email'],
             ['Email', 'email', 'message' => 'Indirizzo email non valido'],
             [['UserName', 'Email'], 'trim'],

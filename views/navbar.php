@@ -20,15 +20,12 @@ use yii\helpers\Url;
     if (Yii::$app->user->isGuest) :
         $items[] = ['label' => 'Login', 'url' => ['/login'], 'active' => $this->context->module->id == 'user' && $this->context->id == 'default' && $this->context->action->id == 'login'];
     else :
-//        $items[] = [
-//            'label' => 'Estrazioni',
-//            'active' => $this->context->id == 'estrazioni',
-//            'items' => [
-//                ['label' => '<i class="fa fa-folder-open-o" style="width: 20px;"></i> Storico', 'url' => Url::to(['/estrazioni/storico'])],
-//                ['label' => '<i class="fa fa-plus-circle" style="width: 20px;"></i> Nuova', 'url' => Url::to(['/estrazioni/nuova'])],
-//                ['label' => '<i class="fa fa-cogs" style="width: 20px;"></i> Generazione Xlsx', 'url' => Url::to(['/estrazioni/generazione-xlsx'])],
-//            ]
-//        ];
+        $items[] = [
+            'label' => 'Progetti',
+            'active' => $this->context->id == 'projects',
+            'url' => Url::to(['/progetti']),
+            'visible' => Yii::$app->user->isDeveloper(),
+        ];
         $userSubitems = [];
         if (Yii::$app->user->isDeveloper()) :
             $userSubitems[] = ['label' => '<i class="fa fa-group"></i> Utenti', 'url' => ['/utenti']];

@@ -40,6 +40,7 @@ AppAsset::register($this);
         <footer>
             <div class="container">
                 <p class="pull-left">
+                    <i class="fa fa-bookmark-o" style="font-size: 24px;"></i> <span style="font-size: 18px;">LogBook</span><br />
                     Versione: <?= Yii::$app->version; ?>
                 </p>
                 <p class="social pull-right">
