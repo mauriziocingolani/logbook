@@ -6,6 +6,7 @@ use Yii;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
 use mauriziocingolani\yii2fmwkphp\NamedActiveRecord;
+use mauriziocingolani\yii2fmwkphp\PasswordHelper;
 
 /**
  * @property integer $UserID ID utente
@@ -22,19 +23,29 @@ use mauriziocingolani\yii2fmwkphp\NamedActiveRecord;
  */
 class User extends NamedActiveRecord implements IdentityInterface {
 
+    public $Password1;
+    public $Password2;
+
     public function attributeLabels() {
         return [
             'UserID' => '#',
+            'RoleID' => 'Ruolo',
             'UserName' => 'Nome utente',
             'Email' => 'Email',
+            'Password1' => 'Password',
+            'Password2' => 'Conferma password',
         ];
     }
 
     public function rules() {
         return [
+            ['RoleID', 'required'],
             ['UserName', 'required', 'message' => 'Inserisci il nome utente'],
             ['Email', 'required', 'message' => 'Inserisci l\'indirizzo email'],
             ['Email', 'email', 'message' => 'Indirizzo email non valido'],
+            [['UserName', 'Email'], 'trim'],
+            [['Password1', 'Password2'], 'default'],
+            ['Password2', 'compare', 'compareAttribute' => 'Password1', 'operator' => '==', 'message' => 'Le due password non corrispondono'],
         ];
     }
 
@@ -96,7 +107,7 @@ class User extends NamedActiveRecord implements IdentityInterface {
      * @return boolean Esito della verifica password
      */
     public function validatePassword($password) {
-        return Yii::$app->getSecurity()->decryptByKey(base64_decode($this->getAttribute('Password')), Yii::$app->params['encryption_key']) === $password;
+        return PasswordHelper::DecryptFromMysql($this->getAttribute('Password')) === $password;
     }
 
     /* Metodi statici */

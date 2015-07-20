@@ -24,4 +24,13 @@ body > footer {
     body > footer .social i {
       font-size: 18px; }
 
+/* Colore oggetti e # */
+.lb-obj {
+  color: #55acee; }
+
+i.fa-slack {
+  -ms-transform: rotate(19deg);
+  -webkit-transform: rotate(19deg);
+  transform: rotate(19deg); }
+
 /*# sourceMappingURL=main.css.map */

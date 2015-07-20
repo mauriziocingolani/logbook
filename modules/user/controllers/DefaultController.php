@@ -9,6 +9,7 @@ use app\modules\user\models\UserSearch;
 use app\modules\user\models\Login;
 use app\modules\user\models\Role;
 use mauriziocingolani\yii2fmwkphp\Controller;
+use mauriziocingolani\yii2fmwkphp\PasswordHelper;
 
 class DefaultController extends Controller {
 
@@ -62,29 +63,43 @@ class DefaultController extends Controller {
                     'dataProvider' => $dataProvider,
         ]);
     }
-    
-        public function actionUser($username = null) {
-        $model = new User;
+
+    public function actionUser($username = null) {
+        if ($username && $username != 'nuovo') :
+            $model = User::FindByUserName($username);
+        else :
+            $model = new User;
+        endif;
         if (Yii::$app->getRequest()->isPost) :
-//            $model->setAttributes(Yii::$app->getRequest()->post('User'));
-//            $model->RoleID = Role::ROLE_GUEST;
-//            $password = substr(sha1(time()), 0, 10);
-//            $model->Password = base64_encode(Yii::$app->getSecurity()->encryptByKey($password, Yii::$app->params['encryption_key']));
-//            try {
-//                if ($model->save()) :
-//                    Yii::$app->mailer->compose('new-account', ['username' => $model->UserName, 'password' => $password])->
-//                            setFrom('webadmin@mastersida.info')->
-//                            setTo($model->getAttribute('Email'))->
-//                            setBcc('m.cingolani@ggfgroup.it')->
-//                            setSubject('Master SIDA - Account per accesso Gestionale Almalaurea')->
-//                            send();
-//                    Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $model->getAttribute('Email') . '.');
-//                else :
-//                    Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.');
-//                endif;
-//            } catch (yii\db\Exception $e) {
-//                Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
-//            }
+            $model->setAttributes(Yii::$app->getRequest()->post('User'));
+            if ($model->Password1) :
+                $password = $model->Password1;
+                $model->Password = PasswordHelper::EncryptToMysql($password);
+            elseif ($model->isNewRecord) :
+                $password = PasswordHelper::GeneratePassword();
+                $model->Password = PasswordHelper::EncryptToMysql($password);
+            endif;
+            try {
+                $new = $model->isNewRecord;
+                if ($model->save()) :
+                    if ($new) :
+                        Yii::$app->mailer->compose('new-account', ['username' => $model->UserName, 'password' => $password])->
+                                setFrom('webmaster@mauriziocingolani.it')->
+                                setTo($model->getAttribute('Email'))->
+                                setBcc('maurizio@mauriziocingolani.it')->
+                                setSubject('LogBook - Account per accesso')->
+                                send();
+                        Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $model->getAttribute('Email') . '.');
+                        return $this->redirect('/utenti/' . $model->UserName);
+                    else :
+                        Yii::$app->session->setFlash('success', 'Utente modificato!');
+                    endif;
+                else :
+                    Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.');
+                endif;
+            } catch (yii\db\Exception $e) {
+                Yii::$app->session->setFlash('error', 'Impossibile creare l\'utente.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
+            }
         endif;
         return $this->render('user', ['model' => $model]);
     }

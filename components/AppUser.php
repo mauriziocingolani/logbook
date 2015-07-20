@@ -11,6 +11,9 @@ use yii\web\User;
  */
 class AppUser extends User {
 
+    const ROLE_DEVELOPER = 1;
+    const ROLE_GUEST = 2;
+
     public function isDeveloper() {
         return !Yii::$app->user->isGuest && Yii::$app->user->identity->RoleID == 1;
     }
