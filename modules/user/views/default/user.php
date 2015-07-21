@@ -7,8 +7,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use app\modules\user\models\Role;
 
-$this->addBreadcrumb('Utenti', 'utenti');
-$this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo utente' : 'Utente ' . $model->UserName);
+$this->addBreadcrumb('@Utenti', 'utenti');
+$this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo utente' : 'Utente @' . $model->UserName);
 ?>
 
 <h1>

@@ -5,7 +5,7 @@ body > .container {
   padding-top: 60px; }
 
 body .wrap > nav {
-  opacity: 0.1; }
+  opacity: 1.1; }
 
 body > footer {
   border-top: 1px solid #bababa;
@@ -32,5 +32,11 @@ i.fa-slack {
   -ms-transform: rotate(19deg);
   -webkit-transform: rotate(19deg);
   transform: rotate(19deg); }
+
+/* Varie */
+p.created {
+  color: #bababa;
+  font-size: 12px;
+  font-style: italic; }
 
 /*# sourceMappingURL=main.css.map */

@@ -4,7 +4,6 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use app\controllers\ProjectsController;
@@ -19,8 +18,9 @@ use app\controllers\ProjectsController;
  * @property string $Slug
  * 
  * Relazioni
- * @property \app\modules\user\models\User $Creator
- * @property \app\modules\user\models\User $Updater
+ * @property \app\modules\user\models\User $creator
+ * @property \app\modules\user\models\User $updater
+ * @property Hashtag[] $hashtags
  */
 class Project extends ActiveRecord {
 
@@ -53,6 +53,18 @@ class Project extends ActiveRecord {
     }
 
     /* Relazioni */
+
+    public function getCreator() {
+        return $this->hasOne(\app\modules\user\models\User::className(), ['UserID' => 'CreatedBy']);
+    }
+    public function getUpdater() {
+        return $this->hasOne(\app\modules\user\models\User::className(), ['UserID' => 'UpdatedBy']);
+    }
+
+    public function getHashtags() {
+        return $this->hasMany(Hashtag::className(), ['HashtagID' => 'HashtagID'])->orderBy(['Name' => SORT_ASC]);
+    }
+
     /* Eventi */
 
     public function beforeSave($insert) {
@@ -100,7 +112,7 @@ class Project extends ActiveRecord {
      * @return Project
      */
     public static function FindBySlug($slug) {
-        return self::find()->where('Slug=:slug', ['slug' => $slug])->one();
+        return self::find()->with(['creator','updater'])->where('Slug=:slug', ['slug' => $slug])->one();
     }
 
 }
