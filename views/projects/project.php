@@ -1,6 +1,7 @@
 <?php
 /* @var $this mauriziocingolani\yii2fmwkphp\View */
 /* @var $model app\models\Project */
+/* @var $name string */
 
 use yii\bootstrap\ActiveForm;
 use mauriziocingolani\yii2fmwkphp\Html;
@@ -11,21 +12,18 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Ut
 
 <h1>
     <?php if ($model->isNewRecord) : ?>
-        Nuovo progetto
+        <?= $name; ?>
     <?php else : ?>
-        Progetto <span class="lb-obj"><i class="fa fa-usd"></i><?= $model->Slug; ?></span>
+        Progetto <span class="lb-obj"><i class="fa fa-usd"></i><?= $name; ?></span>
     <?php endif; ?>
 </h1>
 
-<?php if (Yii::$app->session->hasFlash('success')) : ?>
-    <div class="alert alert-success">
-        <?= Yii::$app->session->getFlash('success'); ?>
+<!-- Flash -->
+<?php foreach (Yii::$app->session->allFlashes as $type => $message) : ?>
+    <div class="alert alert-<?= $type; ?>">
+        <?= $message; ?>
     </div>
-<?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-    <div class="alert alert-danger">
-        <?= Yii::$app->session->getFlash('error'); ?>
-    </div>
-<?php endif; ?>
+<?php endforeach; ?>
 
 <?php
 $form = ActiveForm::begin([

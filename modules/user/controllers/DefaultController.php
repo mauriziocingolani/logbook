@@ -9,7 +9,6 @@ use app\modules\user\models\UserSearch;
 use app\modules\user\models\Login;
 use app\modules\user\models\Role;
 use mauriziocingolani\yii2fmwkphp\Controller;
-use mauriziocingolani\yii2fmwkphp\PasswordHelper;
 
 class DefaultController extends Controller {
 
@@ -67,42 +66,33 @@ class DefaultController extends Controller {
     public function actionUser($username = null) {
         if ($username && $username != 'nuovo') :
             $model = User::FindByUserName($username);
+            if ($model == null) :
+                throw new Exception(404, 'L\'utente non esiste.');
+            endif;
+            $name = $model->UserName;
         else :
             $model = new User;
+            $name = 'Nuovo utente';
         endif;
         if (Yii::$app->getRequest()->isPost) :
-            $model->setAttributes(Yii::$app->getRequest()->post('User'));
-            if ($model->Password1) :
-                $password = $model->Password1;
-                $model->Password = PasswordHelper::EncryptToMysql($password);
-            elseif ($model->isNewRecord) :
-                $password = PasswordHelper::GeneratePassword();
-                $model->Password = PasswordHelper::EncryptToMysql($password);
-            endif;
-            try {
-                $new = $model->isNewRecord;
-                if ($model->save()) :
-                    if ($new) :
-                        Yii::$app->mailer->compose('new-account', ['username' => $model->UserName, 'password' => $password])->
-                                setFrom('webmaster@mauriziocingolani.it')->
-                                setTo($model->getAttribute('Email'))->
-                                setBcc('maurizio@mauriziocingolani.it')->
-                                setSubject('LogBook - Account per accesso')->
-                                send();
-                        Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $model->getAttribute('Email') . '.');
-                        return $this->redirect('/utenti/' . $model->UserName);
-                    else :
-                        Yii::$app->session->setFlash('success', 'Utente modificato!');
-                        $this->refresh();
-                    endif;
+            $new = $model->isNewRecord;
+            $result = $model->saveModel(Yii::$app->getRequest()->post('User'));
+            if ($result === true) :
+                if ($new) :
+                    Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $model->getAttribute('Email') . '.');
+                    return $this->redirect('/utenti/' . $model->UserName);
                 else :
-                    Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.');
+                    Yii::$app->session->setFlash('success', 'Utente modificato!');
+                    return $this->refresh();
                 endif;
-            } catch (yii\db\Exception $e) {
-                Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
-            }
+            else :
+                Yii::$app->session->setFlash('danger', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.');
+            endif;
         endif;
-        return $this->render('user', ['model' => $model]);
+        return $this->render('user', [
+                    'model' => $model,
+                    'name' => $name,
+        ]);
     }
 
 }

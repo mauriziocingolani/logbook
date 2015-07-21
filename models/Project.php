@@ -7,6 +7,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use app\controllers\ProjectsController;
 
 /**
  * @property int $ProjectID
@@ -43,6 +44,7 @@ class Project extends ActiveRecord {
     public function rules() {
         return [
             ['Name', 'required', 'message' => 'Devi inserire il nome del progetto'],
+            ['Name', 'string', 'max' => 25, 'tooLong' => 'Il nome del progetto deve contenere al massimo 30 caratteri'],
         ];
     }
 
@@ -69,6 +71,29 @@ class Project extends ActiveRecord {
     }
 
     /* Metodi */
+
+    public function saveModel($attributes) {
+        $this->setAttributes($attributes);
+        try {
+            $new = $this->isNewRecord;
+            return $this->save();
+        } catch (yii\db\Exception $e) {
+            $error = null;
+            switch ($e->errorInfo[1]) :
+                case 1062: # ER_DUP_ENTRY
+                    if (strpos($e->errorInfo[2], 'unique_projects_name') !== false) :
+                        $error = 'Nome progetto gi&agrave; utilizzato.';
+                    elseif (strpos($e->errorInfo[2], 'unique_projects_slug') !== false) :
+                        $error = 'Questo nome progetto porta a un nome breve (' . $this->Slug . ') gi&agrave; esistente.';
+                    endif;
+                    break;
+            endswitch;
+            # mostro il messaggio solo se è un errore riconosciuto oppure se sono in debug
+            Yii::$app->session->setFlash('danger', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' il progetto.' .
+                    ($error || YII_DEBUG ? ' Il server riporta:<p style="font-weight: bold;">' . ($error ? $error : $e->errorInfo[2]) . '</p>' : ''));
+        }
+    }
+
     /* Metodi statici */
 
     /**

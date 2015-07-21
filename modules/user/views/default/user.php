@@ -19,15 +19,12 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo utente' : 'Uten
     <?php endif; ?>
 </h1>
 
-<?php if (Yii::$app->session->hasFlash('success')) : ?>
-    <div class="alert alert-success">
-        <?= Yii::$app->session->getFlash('success'); ?>
+<!-- Flash -->
+<?php foreach (Yii::$app->session->allFlashes as $type => $message) : ?>
+    <div class="alert alert-<?= $type; ?>">
+        <?= $message; ?>
     </div>
-<?php elseif (Yii::$app->session->hasFlash('error')) : ?>
-    <div class="alert alert-danger">
-        <?= Yii::$app->session->getFlash('error'); ?>
-    </div>
-<?php endif; ?>
+<?php endforeach; ?>
 
 <?php
 $form = ActiveForm::begin([
@@ -47,4 +44,15 @@ $form = ActiveForm::begin([
 </div>
 
 <?php ActiveForm::end(); ?>
+
+<div class="alert alert-info">
+    <p><strong>Regole per il nome utente:</strong></p>
+    <ul>
+        <li>lunghezza minima 3 caratteri, massima 20</li>
+        <li>pu&ograve; contenere solo lettere minuscole, numeri e underscore ( _ )</li>
+        <li>deve iniziare con una lettera</li>
+        <li>non pu&ograve; terminare con un underscore</li>
+    </ul>
+</div>
+
 

@@ -7,6 +7,7 @@ use yii\db\Expression;
 use yii\web\IdentityInterface;
 use mauriziocingolani\yii2fmwkphp\NamedActiveRecord;
 use mauriziocingolani\yii2fmwkphp\PasswordHelper;
+use app\modules\user\controllers\DefaultController;
 
 /**
  * @property integer $UserID ID utente
@@ -42,6 +43,7 @@ class User extends NamedActiveRecord implements IdentityInterface {
             ['RoleID', 'required'],
             ['UserName', 'required', 'message' => 'Inserisci il nome utente'],
             ['UserName', 'compare', 'compareValue' => 'nuovo', 'operator' => '!=', 'message' => 'Nome utente non consentito'],
+            ['UserName', 'match', 'pattern' => '/^[a-z]{1}[a-z0-9_]+[a-z0-9]{1}$/i', 'message' => 'Nome utente non valido'],
             ['Email', 'required', 'message' => 'Inserisci l\'indirizzo email'],
             ['Email', 'email', 'message' => 'Indirizzo email non valido'],
             [['UserName', 'Email'], 'trim'],
@@ -100,6 +102,50 @@ class User extends NamedActiveRecord implements IdentityInterface {
             return $this->UserName;
         if ($this->Email)
             return $this->Email;
+    }
+
+    public function saveModel($attributes) {
+        $this->setAttributes($attributes);
+        if ($this->Password1) :
+            $password = $this->Password1;
+            $this->Password = PasswordHelper::EncryptToMysql($password);
+        elseif ($this->isNewRecord) :
+            $password = PasswordHelper::GeneratePassword();
+            $this->Password = PasswordHelper::EncryptToMysql($password);
+        endif;
+        try {
+            $new = $this->isNewRecord;
+            return $this->save();
+//            if ($this->save()) :
+//                if ($new) :
+//                    Yii::$app->mailer->compose('new-account', ['username' => $this->UserName, 'password' => $password])->
+//                            setFrom('webmaster@mauriziocingolani.it')->
+//                            setTo($this->getAttribute('Email'))->
+//                            setBcc('maurizio@mauriziocingolani.it')->
+//                            setSubject('LogBook - Account per accesso')->
+//                            send();
+//                    Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $this->getAttribute('Email') . '.');
+//                    return $controller->redirect('/utenti/' . $this->UserName);
+//                else :
+//                    Yii::$app->session->setFlash('success', 'Utente modificato!');
+//                    $controller->refresh();
+//                endif;
+//            else :
+//                Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.');
+//            endif;
+        } catch (yii\db\Exception $e) {
+            $error = null;
+            switch ($e->errorInfo[1]) :
+                case 1062: # ER_DUP_ENTRY
+                    if (strpos($e->errorInfo[2], 'unique_username') !== false) :
+                        $error = 'Nome utente gi&agrave; utilizzato.';
+                    endif;
+                    break;
+            endswitch;
+            # mostro il messaggio solo se è un errore riconosciuto oppure se sono in debug
+            Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.' .
+                    ($error || YII_DEBUG ? ' Il server riporta:<p style="font-weight: bold;">' . ($error ? $error : $e->errorInfo[2]) . '</p>' : ''));
+        }
     }
 
     /**

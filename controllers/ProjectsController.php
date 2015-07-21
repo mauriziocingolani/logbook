@@ -31,25 +31,24 @@ class ProjectsController extends LogbookController {
             if ($model == null) :
                 throw new Exception(404, 'Il progetto non esiste.');
             endif;
+            $name = $model->Name;
         else :
             $model = new Project;
+            $name = 'Nuovo progetto';
         endif;
         if (Yii::$app->getRequest()->isPost) :
-            $model->setAttributes(Yii::$app->getRequest()->post('Project'));
-            try {
-                $new = $model->isNewRecord;
-                if ($model->save()) :
-                    Yii::$app->session->setFlash('success', 'Progetto ' . ($new ? 'creato' : 'modificato') . '!');
-                    return $this->redirect('/progetti/' . $model->Slug);
-                else :
-                    Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' il progetto.');
-                endif;
-            } catch (yii\db\Exception $e) {
-                Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' il progetto.' . (YII_DEBUG ? ' Il server riporta:<p>' . $e->errorInfo[2] . '</p>' : ''));
-            }
+            $new = $model->isNewRecord;
+            $result = $model->saveModel(Yii::$app->getRequest()->post('Project'));
+            if ($result === true) :
+                Yii::$app->session->setFlash('success', 'Progetto ' . ($new ? 'creato' : 'modificato') . '!');
+                return $this->redirect(['/progetti/' . $model->Slug]);
+            elseif ($result === false) :
+                Yii::$app->session->setFlash('danger', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' il progetto.');
+            endif;
         endif;
         return $this->render('project', [
                     'model' => $model,
+                    'name' => $name,
         ]);
     }
 
