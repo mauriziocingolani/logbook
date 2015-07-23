@@ -57,12 +57,13 @@ class Project extends ActiveRecord {
     public function getCreator() {
         return $this->hasOne(\app\modules\user\models\User::className(), ['UserID' => 'CreatedBy']);
     }
+
     public function getUpdater() {
         return $this->hasOne(\app\modules\user\models\User::className(), ['UserID' => 'UpdatedBy']);
     }
 
     public function getHashtags() {
-        return $this->hasMany(Hashtag::className(), ['HashtagID' => 'HashtagID'])->orderBy(['Name' => SORT_ASC]);
+        return $this->hasMany(Hashtag::className(), ['ProjectID' => 'ProjectID'])->orderBy(['Name' => SORT_ASC]);
     }
 
     /* Eventi */
@@ -112,7 +113,7 @@ class Project extends ActiveRecord {
      * @return Project
      */
     public static function FindBySlug($slug) {
-        return self::find()->with(['creator','updater'])->where('Slug=:slug', ['slug' => $slug])->one();
+        return self::find()->with(['creator', 'updater', 'hashtags'])->where('Slug=:slug', ['slug' => $slug])->one();
     }
 
 }

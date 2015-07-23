@@ -12,7 +12,7 @@ class m150721_122208_create_hashtags_table extends Migration {
             'CreatedBy' => self::typeUnsignedInteger(),
             'Updated' => self::typeDate(),
             'UpdatedBy' => self::typeUnsignedInteger(),
-            'ProjectID' => self::typeUnsignedInteger(),
+            'ProjectID' => self::typeUnsignedInteger(true),
             'Name' => self::typeVarchar(255),
             'PRIMARY KEY (HashtagID)',
                 ], self::$tableOptions);

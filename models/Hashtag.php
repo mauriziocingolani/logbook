@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -21,6 +22,12 @@ use yii\db\Expression;
  */
 class Hashtag extends ActiveRecord {
 
+    public function rules() {
+        return [
+            ['Name', 'required', 'message' => 'Inserisci l\'argomento'],
+        ];
+    }
+
     public static function tableName() {
         return 'hashtags';
     }
@@ -36,8 +43,9 @@ class Hashtag extends ActiveRecord {
     }
 
     public function getProject() {
-        return $this->hasOne(Project::className(), ['ProjectID'=>'ProjectID']);
+        return $this->hasOne(Project::className(), ['ProjectID' => 'ProjectID']);
     }
+
     /* Eventi */
 
     public function beforeSave($insert) {
@@ -56,5 +64,26 @@ class Hashtag extends ActiveRecord {
     }
 
     /* Metodi */
+
+    public function saveModel($attributes, $projectid) {
+        $this->setAttributes($attributes);
+        $this->ProjectID = $projectid;
+        try {
+            return $this->save();
+        } catch (yii\db\Exception $e) {
+            $error = null;
+            switch ($e->errorInfo[1]) :
+                case 1062: # ER_DUP_ENTRY
+                    if (strpos($e->errorInfo[2], 'unique_hashtags_name_project') !== false) :
+                        $error = 'Argomento gi&agrave; creato per questo progetto.';
+                    endif;
+                    break;
+            endswitch;
+            # mostro il messaggio solo se è un errore riconosciuto oppure se sono in debug
+            Yii::$app->session->setFlash('hashtag-danger', 'Impossibile creare l\'argomento.' .
+                    ($error || YII_DEBUG ? ' Il server riporta:<p style="font-weight: bold;">' . ($error ? $error : $e->errorInfo[2]) . '</p>' : ''));
+        }
+    }
+
     /* Metodi statici */
 }
