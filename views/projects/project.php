@@ -23,7 +23,7 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
         Creato il <?= date('d-m-Y', strtotime($model->Created)); ?> 
         da <strong><i class="fa fa-at"></i><?= $model->creator->UserName; ?></strong>
         <?php if ($model->Updated) : ?>
-            - Modificato il <?= date('d-m-Y', strtotime($model->Updated)); ?> 
+            - Aggiornato il <?= date('d-m-Y', strtotime($model->Updated)); ?> 
             da <strong><i class="fa fa-at"></i><?= $model->updater->UserName; ?></strong>
         <?php endif; ?>
     </p>

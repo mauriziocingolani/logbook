@@ -40,7 +40,7 @@ class ProjectsController extends LogbookController {
             $new = $model->isNewRecord;
             $result = $model->saveModel(Yii::$app->getRequest()->post('Project'));
             if ($result === true) :
-                Yii::$app->session->setFlash('success', 'Progetto ' . ($new ? 'creato' : 'modificato') . '!');
+                Yii::$app->session->setFlash('success', 'Progetto ' . ($new ? 'creato' : 'aggiornato') . '!');
                 return $this->redirect(['/progetti/' . $model->Slug]);
             elseif ($result === false) :
                 Yii::$app->session->setFlash('danger', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' il progetto.');

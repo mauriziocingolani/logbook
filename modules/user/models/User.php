@@ -115,24 +115,16 @@ class User extends NamedActiveRecord implements IdentityInterface {
         endif;
         try {
             $new = $this->isNewRecord;
-            return $this->save();
-//            if ($this->save()) :
-//                if ($new) :
-//                    Yii::$app->mailer->compose('new-account', ['username' => $this->UserName, 'password' => $password])->
-//                            setFrom('webmaster@mauriziocingolani.it')->
-//                            setTo($this->getAttribute('Email'))->
-//                            setBcc('maurizio@mauriziocingolani.it')->
-//                            setSubject('LogBook - Account per accesso')->
-//                            send();
-//                    Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $this->getAttribute('Email') . '.');
-//                    return $controller->redirect('/utenti/' . $this->UserName);
-//                else :
-//                    Yii::$app->session->setFlash('success', 'Utente modificato!');
-//                    $controller->refresh();
-//                endif;
-//            else :
-//                Yii::$app->session->setFlash('error', 'Impossibile ' . ($new ? 'creare' : 'modificare') . ' l\'utente.');
-//            endif;
+            $result=$this->save();
+            if($result &&$new) :
+                    Yii::$app->mailer->compose('new-account', ['username' => $this->UserName, 'password' => $password])->
+                            setFrom('webmaster@mauriziocingolani.it')->
+                            setTo($this->getAttribute('Email'))->
+                            setBcc('maurizio@mauriziocingolani.it')->
+                            setSubject('LogBook - Account per accesso')->
+                            send();
+            endif;
+            return $result;
         } catch (yii\db\Exception $e) {
             $error = null;
             switch ($e->errorInfo[1]) :

@@ -3,16 +3,20 @@
 use yii\helpers\Html;
 ?>
 
-<p>Per accedere a LogBook clicca su questo link (o incollalo sul browser se non lo visualizzi correttamente):</p>
+<p>La tua password dimenticata:</p>
+<dl style="background: lightblue;padding: 10px;">
+    <dt>Password:</dt>
+    <dd style="font-weight: bold;"><?php echo $password; ?></dd>
+</dl>
+
+<p>Ti ricordiamo che per accedere a LogBook puoi cliccare su questo link (o incollarlo sul browser se non lo visualizzi correttamente):</p>
 <p style="padding-left: 25px;">
     <?= Html::a('http://logbook.mauriziocingolani.it/login'); ?>
 </p>
-<p>Queste sono le credenziali per il login:</p>
+<p>e utilizzare il tuo nome utente:</p>
 <dl style="background: lightblue;padding: 10px;">
     <dt>Utente:</dt>
     <dd style="font-weight: bold;"><?php echo $username; ?></dd>
-    <dt>Password:</dt>
-    <dd style="font-weight: bold;"><?php echo $password; ?></dd>
 </dl>
 <p>Se vuoi puoi effattuare il login utilizzando il tuo indirizzo email al posto del nome utente.</p>
 <p style="font-style: italic;">

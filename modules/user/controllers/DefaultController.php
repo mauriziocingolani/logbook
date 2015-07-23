@@ -3,11 +3,12 @@
 namespace app\modules\user\controllers;
 
 use Yii;
-use app\modules\user\models\LoginForm;
-use app\modules\user\models\User;
-use app\modules\user\models\UserSearch;
 use app\modules\user\models\Login;
+use app\modules\user\models\LoginForm;
+use app\modules\user\models\PasswordForm;
 use app\modules\user\models\Role;
+use app\modules\user\models\UserSearch;
+use app\modules\user\models\User;
 use mauriziocingolani\yii2fmwkphp\Controller;
 
 class DefaultController extends Controller {
@@ -26,7 +27,7 @@ class DefaultController extends Controller {
                     ],
                     ['allow' => true,
                         'roles' => ['?'],
-                        'actions' => ['login'],
+                        'actions' => ['login', 'password'],
                     ],
         ]);
     }
@@ -45,6 +46,18 @@ class DefaultController extends Controller {
                         'model' => $model,
             ]);
         endif;
+    }
+
+    public function actionPassword() {
+        $model = new PasswordForm;
+        if (Yii::$app->getRequest()->isPost) :
+            $model->setAttributes(Yii::$app->getRequest()->post('PasswordForm'));
+            if ($model->validate()) :
+                Yii::$app->session->setFlash('success', 'La password &egrave; stata inviata al tuo indirizzo email.');
+                return $this->refresh();
+            endif;
+        endif;
+        return $this->render('password', ['model' => $model]);
     }
 
     public function actionLogout() {
@@ -82,7 +95,7 @@ class DefaultController extends Controller {
                     Yii::$app->session->setFlash('success', 'Utente creato! Un messaggio con le credenziali di accesso &egrave; stato inviato all\'indirizzo ' . $model->getAttribute('Email') . '.');
                     return $this->redirect('/utenti/' . $model->UserName);
                 else :
-                    Yii::$app->session->setFlash('success', 'Utente modificato!');
+                    Yii::$app->session->setFlash('success', 'Utente aggiornato!');
                     return $this->refresh();
                 endif;
             else :

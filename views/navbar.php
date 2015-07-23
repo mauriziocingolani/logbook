@@ -28,7 +28,7 @@ use yii\helpers\Url;
         ];
         $userSubitems = [];
         if (Yii::$app->user->isDeveloper()) :
-            $userSubitems[] = ['label' => '<i class="fa fa-group"></i> Utenti', 'url' => ['/utenti']];
+            $userSubitems[] = ['label' => '<i class="fa fa-at"></i> Utenti', 'url' => ['/utenti']];
             $userSubitems[] = '<li class="divider"></li>';
         endif;
 //                $userSubitems[] = ['label' => '<i class="fa fa-info-circle"></i> Profilo', 'url' => ['#']];

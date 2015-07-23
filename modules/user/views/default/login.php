@@ -31,8 +31,10 @@ $this->title = 'Login';
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary']) ?> 
+                <p style="margin-top: 10px;"><?= Html::a('Dimenticato la password?', ['/password-dimenticata']); ?></p>
             </div>
         </div>
+        
         <?php ActiveForm::end() ?>
 
     </div>
