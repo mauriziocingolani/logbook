@@ -6,6 +6,7 @@
 /* @var $name string */
 
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Alert;
 use mauriziocingolani\yii2fmwkphp\Html;
 
 $this->addBreadcrumb('Progetti', 'progetti');
@@ -61,9 +62,18 @@ $form = ActiveForm::begin([
 
     <?php if (count($model->hashtags) > 0) : ?>
 
-        <?php foreach ($model->hashtags as $hash) : ?>
-            <div class="alert alert-info" style="display: inline-block;"><i class="fa fa-slack"></i><?= $hash->Name; ?></div>
-        <?php endforeach; ?>
+        <?php
+        foreach ($model->hashtags as $hash) :
+            echo Alert::widget([
+                'options' => [
+                    'class' => 'alert-info',
+                    'style' => 'display: inline-block;margin-right: 10px;',
+                ],
+                'closeButton' => false,
+                'body' => $hash->Slug,
+            ]);
+        endforeach;
+        ?>
 
     <?php else : ?>
 

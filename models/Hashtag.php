@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -14,6 +15,7 @@ use yii\db\Expression;
  * @property int $UpdatedBy
  * @property int $ProjectID
  * @property string $Name
+ * @property string $Slug
  * 
  * Relazioni
  * @property \app\modules\user\models\User $creator
@@ -21,6 +23,16 @@ use yii\db\Expression;
  * @property Project $project
  */
 class Hashtag extends ActiveRecord {
+
+    public function behaviors() {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'Name',
+                'slugAttribute' => 'Slug',
+            ],
+        ];
+    }
 
     public function rules() {
         return [

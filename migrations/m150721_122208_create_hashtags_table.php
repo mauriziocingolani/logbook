@@ -14,12 +14,13 @@ class m150721_122208_create_hashtags_table extends Migration {
             'UpdatedBy' => self::typeUnsignedInteger(),
             'ProjectID' => self::typeUnsignedInteger(true),
             'Name' => self::typeVarchar(255),
+            'Slug' => self::typeVarchar(255, true),
             'PRIMARY KEY (HashtagID)',
                 ], self::$tableOptions);
         $this->addForeignKey('fk_hashtags_createdby', 'hashtags', 'CreatedBy', 'users', 'UserID');
         $this->addForeignKey('fk_hashtags_updatedby', 'hashtags', 'UpdatedBy', 'users', 'UserID');
         $this->addForeignKey('fk_hashtags_project', 'hashtags', 'ProjectID', 'projects', 'ProjectID');
-        $this->createIndex('unique_hashtags_name_project', 'hashtags', ['ProjectId', 'Name'], true);
+        $this->createIndex('unique_hashtags_name_project', 'hashtags', ['ProjectId', 'Slug'], true);
         $this->createIndex('index_hashtags_name', 'hashtags', 'Name');
     }
 
