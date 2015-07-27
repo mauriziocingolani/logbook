@@ -92,7 +92,7 @@ class Hashtag extends ActiveRecord {
                     break;
             endswitch;
             # mostro il messaggio solo se è un errore riconosciuto oppure se sono in debug
-            Yii::$app->session->setFlash('hashtag-danger', 'Impossibile creare l\'argomento.' .
+            Yii::$app->session->setFlash('hashtagdanger', 'Impossibile creare l\'argomento.' .
                     ($error || YII_DEBUG ? ' Il server riporta:<p style="font-weight: bold;">' . ($error ? $error : $e->errorInfo[2]) . '</p>' : ''));
         }
     }

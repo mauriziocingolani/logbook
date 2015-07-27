@@ -33,11 +33,11 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
 <?php endif; ?>
 
 <!-- Flash -->
-<?php foreach (Yii::$app->session->allFlashes as $type => $message) : ?>
-    <div class="alert alert-<?= $type; ?>">
-        <?= $message; ?>
-    </div>
-<?php endforeach; ?>
+    <?php if (Yii::$app->session->hasFlash('success')) : ?>
+        <div class="alert alert-success"><?= Yii::$app->session->getFlash('success'); ?></div>
+    <?php elseif (Yii::$app->session->hasFlash('danger')) : ?>
+        <div class="alert alert-danger"><?= Yii::$app->session->getFlash('danger'); ?></div>
+    <?php endif; ?>
 
 <?php
 $form = ActiveForm::begin([
@@ -81,10 +81,10 @@ $form = ActiveForm::begin([
 
     <?php endif; ?>
 
-    <?php if (Yii::$app->session->hasFlash('hashtag-success')) : ?>
-        <div class="alert alert-success"><?= Yii::$app->session->getFlash('hashtag-success'); ?></div>
-    <?php elseif (Yii::$app->session->hasFlash('hashtag-danger')) : ?>
-        <div class="alert alert-danger"><?= Yii::$app->session->getFlash('hashtag-danger'); ?></div>
+    <?php if (Yii::$app->session->hasFlash('hashtagsuccess')) : ?>
+        <div class="alert alert-success"><?= Yii::$app->session->getFlash('hashtagsuccess'); ?></div>
+    <?php elseif (Yii::$app->session->hasFlash('hashtagdanger')) : ?>
+        <div class="alert alert-danger"><?= Yii::$app->session->getFlash('hashtagdanger'); ?></div>
     <?php endif; ?>
 
     <?php

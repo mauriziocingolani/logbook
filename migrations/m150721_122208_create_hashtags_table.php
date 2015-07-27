@@ -8,9 +8,9 @@ class m150721_122208_create_hashtags_table extends Migration {
     public function up() {
         $this->createTable('hashtags', [
             'HashtagID' => self::$primaryKey,
-            'Created' => self::typeDate(),
+            'Created' => self::typeDate(true),
             'CreatedBy' => self::typeUnsignedInteger(),
-            'Updated' => self::typeDate(),
+            'Updated' => self::typeDate(true),
             'UpdatedBy' => self::typeUnsignedInteger(),
             'ProjectID' => self::typeUnsignedInteger(true),
             'Name' => self::typeVarchar(255),

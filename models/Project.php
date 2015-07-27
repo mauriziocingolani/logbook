@@ -109,6 +109,10 @@ class Project extends ActiveRecord {
 
     /* Metodi statici */
 
+    public static function GetAll() {
+        return self::find()->orderBy(['Name' => SORT_ASC])->all();
+    }
+
     /**
      * @return Project
      */

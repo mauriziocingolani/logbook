@@ -52,10 +52,10 @@ class ProjectsController extends LogbookController {
             elseif (Yii::$app->getRequest()->post('Hashtag')) :
                 $result = $hashtag->saveModel(Yii::$app->getRequest()->post('Hashtag'), $model->ProjectID);
                 if ($result === true) :
-                    Yii::$app->session->setFlash('hashtag-success', 'Argomento aggiunto!');
+                    Yii::$app->session->setFlash('hashtagsuccess', 'Argomento aggiunto!');
                     return $this->refresh();
                 elseif ($result === false) :
-                    Yii::$app->session->setFlash('hashtag-danger', 'Impossibile aggiungere l\'argomento.');
+                    Yii::$app->session->setFlash('hashtagdanger', 'Impossibile aggiungere l\'argomento.');
                 endif;
             endif;
         endif;

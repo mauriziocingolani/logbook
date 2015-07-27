@@ -21,6 +21,11 @@ use yii\helpers\Url;
         $items[] = ['label' => 'Login', 'url' => ['/login'], 'active' => $this->context->module->id == 'user' && $this->context->id == 'default' && $this->context->action->id == 'login'];
     else :
         $items[] = [
+            'label' => 'Log',
+            'active' => $this->context->id == 'log',
+            'url' => Url::to(['/log']),
+        ];
+        $items[] = [
             'label' => '<i class="fa fa-usd"></i>Progetti',
             'active' => $this->context->id == 'projects',
             'url' => Url::to(['/progetti']),
