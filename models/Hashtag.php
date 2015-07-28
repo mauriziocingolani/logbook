@@ -98,4 +98,12 @@ class Hashtag extends ActiveRecord {
     }
 
     /* Metodi statici */
+
+    /**
+     * @return Hashtag
+     */
+    public static function FindBySlug($slug, $projectid) {
+        return self::find()->where(['Slug' => $slug, 'ProjectID' => $projectid])->one();
+    }
+
 }

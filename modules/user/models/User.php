@@ -115,14 +115,14 @@ class User extends NamedActiveRecord implements IdentityInterface {
         endif;
         try {
             $new = $this->isNewRecord;
-            $result=$this->save();
-            if($result &&$new) :
-                    Yii::$app->mailer->compose('new-account', ['username' => $this->UserName, 'password' => $password])->
-                            setFrom('webmaster@mauriziocingolani.it')->
-                            setTo($this->getAttribute('Email'))->
-                            setBcc('maurizio@mauriziocingolani.it')->
-                            setSubject('LogBook - Account per accesso')->
-                            send();
+            $result = $this->save();
+            if ($result && $new) :
+                Yii::$app->mailer->compose('new-account', ['username' => $this->UserName, 'password' => $password])->
+                        setFrom('webmaster@mauriziocingolani.it')->
+                        setTo($this->getAttribute('Email'))->
+                        setBcc('maurizio@mauriziocingolani.it')->
+                        setSubject('LogBook - Account per accesso')->
+                        send();
             endif;
             return $result;
         } catch (yii\db\Exception $e) {

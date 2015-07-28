@@ -6,6 +6,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use mauriziocingolani\yii2fmwkphp\Html;
+use app\models\Entry;
 use app\models\Project;
 
 $this->title = $this->addBreadcrumb('Log');
@@ -53,11 +54,13 @@ $form->field($entry, 'EntryText', [
 <hr />
 
 <ul>
-    <?php foreach (app\models\Entry::find()->orderBy(['Created' => SORT_DESC])->all() as $en) : ?>
+    <?php foreach (Entry::GetAll(5) as $en) : ?>
         <li>
             <em><?= date('d-m-Y', strtotime($en->Created)); ?></em>
             -
-            <?= $en->EntryText; ?>
+            <span class="lb-obj"><i class="fa fa-usd"></i><?= $en->project->Slug; ?></span>
+            :
+            <?= $en->text; ?>
         </li>
     <?php endforeach; ?>
 </ul>

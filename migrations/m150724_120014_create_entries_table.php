@@ -10,14 +10,11 @@ class m150724_120014_create_entries_table extends Migration {
             'EntryID' => self::$primaryKey,
             'Created' => self::typeDate(true),
             'CreatedBy' => self::typeUnsignedInteger(),
-            'Updated' => self::typeDate(true),
-            'UpdatedBy' => self::typeUnsignedInteger(),
             'ProjectID' => self::typeUnsignedInteger(true),
             'EntryText' => 'TEXT NOT NULL',
             'PRIMARY KEY (EntryID)',
                 ], self::$tableOptions);
         $this->addForeignKey('fk_entries_createdby', 'entries', 'CreatedBy', 'users', 'UserID');
-        $this->addForeignKey('fk_entries_updatedby', 'entries', 'UpdatedBy', 'users', 'UserID');
         $this->addForeignKey('fk_entries_project', 'entries', 'ProjectID', 'projects', 'ProjectID');
     }
 
