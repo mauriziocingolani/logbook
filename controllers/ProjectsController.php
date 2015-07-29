@@ -13,7 +13,11 @@ class ProjectsController extends LogbookController {
 
     public function behaviors() {
         return $this->accessRules([
-                    ['allow' => true, 'roles' => ['@']],
+                    ['allow' => false,
+                        'matchCallback' => function($rule, $action) {
+                            return Yii::$app->user->isEditor();
+                        },
+                    ],
         ]);
     }
 

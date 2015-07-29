@@ -5,8 +5,8 @@
 
 <div class="panel panel-default entry-widget">
     <div class="panel-heading">
-        <strong><?= date('d-m-Y', strtotime($entry->Created)); ?></strong>
-        by <span class="lb-obj"><i class="fa fa-at"></i><?= $entry->creator->UserName; ?></span>
+        <span class="badge"><?= date('d-m-Y', strtotime($entry->Created)); ?></span>
+        by <strong><i class="fa fa-at"></i><?= $entry->creator->UserName; ?></strong>
     </div>
     <div class="panel-body">
         <?= $entry->text; ?>
