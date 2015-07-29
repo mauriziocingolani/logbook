@@ -41,6 +41,15 @@ i.fa-slack {
     transform: rotate(19deg);
 }
 
+/* Entry widget */
+.entry-widget {
+    .panel-heading {
+        color: gray;
+        padding: 3px;
+        padding-left: 5px;
+    }
+}
+
 /* Varie */
 p.created {
     color: #bababa;

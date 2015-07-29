@@ -6,6 +6,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use mauriziocingolani\yii2fmwkphp\Html;
+use app\components\widgets\EntryWidget;
 use app\models\Entry;
 use app\models\Project;
 
@@ -53,14 +54,7 @@ $form->field($entry, 'EntryText', [
 
 <hr />
 
-<ul>
-    <?php foreach (Entry::GetAll(5) as $en) : ?>
-        <li>
-            <em><?= date('d-m-Y', strtotime($en->Created)); ?></em>
-            -
-            <span class="lb-obj"><i class="fa fa-usd"></i><?= $en->project->Slug; ?></span>
-            :
-            <?= $en->text; ?>
-        </li>
-    <?php endforeach; ?>
-</ul>
+<!-- Elenco entries -->
+<?php foreach (Entry::GetAll(5) as $en) : ?>
+    <?= EntryWidget::widget(['entry' => $en]); ?>
+<?php endforeach; ?>
