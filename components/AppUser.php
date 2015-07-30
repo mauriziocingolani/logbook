@@ -22,13 +22,13 @@ class AppUser extends User {
     public function isEditor($includeDeveloper = true) {
         return !Yii::$app->user->isGuest &&
                 (Yii::$app->user->identity->RoleID == self::ROLE_EDITOR ||
-                ($includeDeveloper && Yii::$app->user->identity->RoleID = self::ROLE_DEVELOPER));
+                ($includeDeveloper && Yii::$app->user->identity->RoleID == self::ROLE_DEVELOPER));
     }
 
     public function isGuest($includeDeveloper = true) {
         return !Yii::$app->user->isGuest &&
                 (Yii::$app->user->identity->RoleID == self::ROLE_GUEST ||
-                ($includeDeveloper && Yii::$app->user->identity->RoleID = self::ROLE_DEVELOPER));
+                ($includeDeveloper && Yii::$app->user->identity->RoleID == self::ROLE_DEVELOPER));
     }
 
 }

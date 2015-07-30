@@ -3,6 +3,8 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+
+/* @var $this mauriziocingolani\yii2fmwkphp\View */
 ?>
 
 <div class="wrap">
@@ -32,6 +34,8 @@ use yii\helpers\Url;
             'visible' => Yii::$app->user->isDeveloper(),
         ];
         $userSubitems = [];
+        $userSubitems[] = ['label' => 'Utente di classe <strong>' . Yii::$app->user->identity->role->Description . '</strong>'];
+        $userSubitems[] = '<li class="divider"></li>';
         if (Yii::$app->user->isDeveloper()) :
             $userSubitems[] = ['label' => '<i class="fa fa-at"></i> Utenti', 'url' => ['/utenti']];
             $userSubitems[] = '<li class="divider"></li>';
