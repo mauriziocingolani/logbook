@@ -7,6 +7,7 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
+use yii\helpers\Url;
 use mauriziocingolani\yii2fmwkphp\Html;
 
 $this->addBreadcrumb('Progetti', 'progetti');
@@ -21,6 +22,7 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
     <?php endif; ?>
 </h1>
 
+<!-- INFO -->
 <?php if (!$model->isNewRecord) : ?>
     <p class="created">
         Creato il <?= date('d-m-Y', strtotime($model->Created)); ?> 
@@ -32,18 +34,19 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
     </p>
 <?php endif; ?>
 
-<!-- Flash -->
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-success"><?= Yii::$app->session->getFlash('success'); ?></div>
-    <?php elseif (Yii::$app->session->hasFlash('danger')) : ?>
-        <div class="alert alert-danger"><?= Yii::$app->session->getFlash('danger'); ?></div>
-    <?php endif; ?>
+<!-- FLASH -->
+<?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <div class="alert alert-success"><?= Yii::$app->session->getFlash('success'); ?></div>
+<?php elseif (Yii::$app->session->hasFlash('danger')) : ?>
+    <div class="alert alert-danger"><?= Yii::$app->session->getFlash('danger'); ?></div>
+<?php endif; ?>
 
+<!-- FORM -->
 <?php
 $form = ActiveForm::begin([
             'id' => 'project-form',
             'options' => ['class' => 'form-vertical'],
-        ])
+        ]);
 ?>
 
 <?= $form->field($model, 'Name')->input('text'); ?>
@@ -58,22 +61,40 @@ $form = ActiveForm::begin([
 
     <hr />
 
+    <!-- ARGOMENTI -->
     <h3 class="lb-obj"><i class="fa fa-slack"></i>Argomenti</h3>
 
     <?php if (count($model->hashtags) > 0) : ?>
 
-        <?php
-        foreach ($model->hashtags as $hash) :
-            echo Alert::widget([
+        <script>
+            function submitDeleteForm(hashtagid) {
+                console.log('pippo');
+                if (confirm('Sei sicuro di voler eliminare questo argomento?')) {
+                    $('#' + hashtagid + '_hashtag_delete').submit();
+                }
+            }
+        </script>
+
+        <?php foreach ($model->hashtags as $hash) : ?>
+            <?php
+            Alert::begin([
                 'options' => [
                     'class' => 'alert-info',
                     'style' => 'display: inline-block;margin-right: 10px;',
                 ],
                 'closeButton' => false,
-                'body' => $hash->Slug,
             ]);
-        endforeach;
-        ?>
+            ?>
+            <?= $hash->Slug; ?>
+            <form id="<?= $hash->HashtagID; ?>_hashtag_delete" action="/progetti/<?= $model->Slug; ?>" method="post" style="display: inline-block;">
+                <input name="DeleteHashtag[hashtagid]" type="hidden" value="<?= $hash->HashtagID; ?>" />
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>" />
+                <a href="" title="Clicca per eliminare l'argomento" onclick="submitDeleteForm(<?= $hash->HashtagID; ?>);
+                        return false;"><i class="fa fa-times"></i></a>
+            </form>
+            <?php Alert::end();
+            ?>
+        <?php endforeach; ?>
 
     <?php else : ?>
 

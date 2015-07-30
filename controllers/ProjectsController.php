@@ -62,6 +62,12 @@ class ProjectsController extends LogbookController {
                 elseif ($result === false) :
                     Yii::$app->session->setFlash('hashtagdanger', 'Impossibile aggiungere l\'argomento.');
                 endif;
+            elseif (Yii::$app->getRequest()->post('DeleteHashtag')) :
+                $result = Hashtag::DeleteHashTag(Yii::$app->getRequest()->post('DeleteHashtag')['hashtagid']);
+                if ($result === true) :
+                    Yii::$app->session->setFlash('hashtagsuccess', 'Argomento eliminato!');
+                    return $this->refresh();
+                endif;
             endif;
         endif;
         return $this->render('project', [

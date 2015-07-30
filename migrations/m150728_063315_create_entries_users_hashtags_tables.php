@@ -25,7 +25,7 @@ class m150728_063315_create_entries_users_hashtags_tables extends Migration {
                 ], self::$tableOptions);
         $this->createIndex('unique_entrieshashtags_entry_user', 'entries_hashtags', ['EntryID', 'HashtagID'], true);
         $this->addForeignKey('fk_entrieshashtags_entry', 'entries_hashtags', 'EntryID', 'entries', 'EntryID');
-        $this->addForeignKey('fk_entrieshashtags_user', 'entries_hashtags', 'HashtagID', 'hashtags', 'HashtagID');
+        $this->addForeignKey('fk_entrieshashtags_hashtag', 'entries_hashtags', 'HashtagID', 'hashtags', 'HashtagID');
     }
 
     public function down() {

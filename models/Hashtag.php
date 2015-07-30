@@ -99,6 +99,22 @@ class Hashtag extends ActiveRecord {
 
     /* Metodi statici */
 
+    public static function DeleteHashTag($hashtagid) {
+        try {
+            return self::findOne($hashtagid)->delete() !== false;
+        } catch (yii\db\Exception $e) {
+            $error = null;
+            switch ($e->errorInfo[1]) :
+                case 1451: # ER_ROW_IS_REFERENCED_2
+                    $error = 'Questo argomento &egrave; gi&agrave; stato citato in qualche voce.';
+                    break;
+            endswitch;
+            # mostro il messaggio solo se è un errore riconosciuto oppure se sono in debug
+            Yii::$app->session->setFlash('hashtagdanger', 'Impossibile eliminare l\'argomento.' .
+                    ($error || YII_DEBUG ? ' Il server riporta:<p style="font-weight: bold;">' . ($error ? $error : $e->errorInfo[2]) . '</p>' : ''));
+        }
+    }
+
     /**
      * @return Hashtag
      */
