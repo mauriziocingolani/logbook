@@ -17,9 +17,17 @@ class LogController extends LogbookController {
     public function actionIndex() {
         $entry = new Entry;
         if (Yii::$app->getRequest()->isPost) :
-            $result = $entry->saveModel(Yii::$app->getRequest()->post('Entry'));
-            if ($result === true) :
-                return $this->refresh();
+            if (Yii::$app->getRequest()->post('Entry')) :
+                $result = $entry->saveModel(Yii::$app->getRequest()->post('Entry'));
+                if ($result === true) :
+                    return $this->refresh();
+                endif;
+            elseif (Yii::$app->getRequest()->post('DeleteEntry')) :
+                $result = Entry::DeleteEntry(Yii::$app->getRequest()->post('DeleteEntry')['entryid']);
+                if ($result === true) :
+                    Yii::$app->session->setFlash('entrysuccess', 'Voce eliminata!');
+                    return $this->refresh();
+                endif;
             endif;
         endif;
         return $this->render('index', ['entry' => $entry]);

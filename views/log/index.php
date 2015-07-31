@@ -21,14 +21,8 @@ $this->title = $this->addBreadcrumb('Log');
 <?php if (Yii::$app->user->isEditor()) : ?>
 
     <?php foreach (Yii::$app->session->getAllFlashes() as $flash) : ?>
-        <div class="alert alert-<?= $flash; ?>"><?= Yii::$app->session->getFlash($flash); ?>)</div>
+        <div class="alert alert-<?= $flash; ?>"><?= Yii::$app->session->getFlash($flash); ?></div>
     <?php endforeach; ?>
-
-    <?php if (Yii::$app->session->hasFlash('success')) : ?>
-        <div class="alert alert-success"><?= Yii::$app->session->getFlash('success'); ?></div>
-    <?php elseif (Yii::$app->session->hasFlash('danger')) : ?>
-        <div class="alert alert-danger"><?= Yii::$app->session->getFlash('danger'); ?></div>
-    <?php endif; ?>
 
     <?php
     $form = ActiveForm::begin([
@@ -59,6 +53,21 @@ $this->title = $this->addBreadcrumb('Log');
 <?php endif; ?>
 
 <!-- Elenco entries -->
+
+<script>
+    function deleteEntry(entryid) {
+        if (confirm('Sei sicuro di voler eliminare questa voce?')) {
+            $('#' + entryid + '_entry_delete').submit();
+        }
+    }
+</script>
+
+<?php if (Yii::$app->session->hasFlash('entrysuccess')) : ?>
+    <div class="alert alert-success"><?= Yii::$app->session->getFlash('entrysuccess'); ?></div>
+<?php elseif (Yii::$app->session->hasFlash('entrydanger')) : ?>
+    <div class="alert alert-danger"><?= Yii::$app->session->getFlash('entrydanger'); ?></div>
+<?php endif; ?>
+
 <?php foreach (Entry::GetAll(5) as $en) : ?>
     <?= EntryWidget::widget(['entry' => $en]); ?>
 <?php endforeach; ?>

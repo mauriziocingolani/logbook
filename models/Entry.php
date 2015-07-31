@@ -81,6 +81,15 @@ class Entry extends ActiveRecord {
         $this->_findObjects();
     }
 
+    public function beforeDelete() {
+        if (parent::beforeDelete()) :
+            Yii::$app->db->createCommand()->delete('entries_users', 'EntryID=:entryid', [':entryid' => $this->EntryID])->execute();
+            Yii::$app->db->createCommand()->delete('entries_hashtags', 'EntryID=:entryid', [':entryid' => $this->EntryID])->execute();
+            return true;
+        endif;
+        return false;
+    }
+
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) :
             $this->Created = new Expression('NOW()');
@@ -187,6 +196,17 @@ class Entry extends ActiveRecord {
     }
 
     /* Metodi statici */
+
+    public static function DeleteEntry($entryid) {
+        try {
+            return self::findOne($entryid)->delete() !== false;
+        } catch (yii\db\Exception $e) {
+            $error = null;
+            # mostro il messaggio solo se è un errore riconosciuto oppure se sono in debug
+            Yii::$app->session->setFlash('entrydanger', 'Impossibile eliminare l\'argomento.' .
+                    ($error || YII_DEBUG ? ' Il server riporta:<p style="font-weight: bold;">' . ($error ? $error : $e->errorInfo[2]) . '</p>' : ''));
+        }
+    }
 
     /**
      * @return Entry[]
