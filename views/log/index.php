@@ -9,6 +9,7 @@ use mauriziocingolani\yii2fmwkphp\Html;
 use app\components\widgets\EntryWidget;
 use app\models\Entry;
 use app\models\Project;
+use app\modules\user\models\User;
 
 $this->title = $this->addBreadcrumb('Log');
 ?>
@@ -19,6 +20,12 @@ $this->title = $this->addBreadcrumb('Log');
 
 <!-- Form inserimento entry -->
 <?php if (Yii::$app->user->isEditor()) : ?>
+
+    <select id="users" style="display: none;">
+        <?php foreach (User::find()->where('BanDateTime IS NULL')->orderBy(['UserName'=>SORT_ASC])->all() as $user) : ?>
+            <option value="<?= $user->UserName; ?>"><?= $user->UserName; ?></option>
+        <?php endforeach; ?>
+    </select>
 
     <?php foreach (Yii::$app->session->getAllFlashes() as $flash) : ?>
         <div class="alert alert-<?= $flash; ?>"><?= Yii::$app->session->getFlash($flash); ?></div>

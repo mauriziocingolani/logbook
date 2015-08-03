@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1f91d91014820d7db1b7c11a55b5b4b7",
+    "hash": "b167728a84f61348a4b3a00b5ac0a788",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -373,16 +373,16 @@
         },
         {
             "name": "mauriziocingolani/yii2-fmwk-php",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mauriziocingolani/yii2-fmwk-php.git",
-                "reference": "007046b193fb24f585dceb204391966800d766bd"
+                "reference": "025b4b4083a6c978baeeacc5a72d9f0b3c9d1845"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mauriziocingolani/yii2-fmwk-php/zipball/007046b193fb24f585dceb204391966800d766bd",
-                "reference": "007046b193fb24f585dceb204391966800d766bd",
+                "url": "https://api.github.com/repos/mauriziocingolani/yii2-fmwk-php/zipball/025b4b4083a6c978baeeacc5a72d9f0b3c9d1845",
+                "reference": "025b4b4083a6c978baeeacc5a72d9f0b3c9d1845",
                 "shasum": ""
             },
             "require": {
@@ -412,7 +412,56 @@
                 "php",
                 "yii2"
             ],
-            "time": "2015-07-14 10:54:04"
+            "time": "2015-08-03 06:30:41"
+        },
+        {
+            "name": "mauriziocingolani/yii2-fmwk-rpsls",
+            "version": "0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mauriziocingolani/yii2-fmwk-rpsls.git",
+                "reference": "44f2aba3b9b09407dbbdeaa06203c103575ac85c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mauriziocingolani/yii2-fmwk-rpsls/zipball/44f2aba3b9b09407dbbdeaa06203c103575ac85c",
+                "reference": "44f2aba3b9b09407dbbdeaa06203c103575ac85c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "mauriziocingolani\\yii2fmwkrpsls\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Maurizio Cingolani",
+                    "email": "mauriziocingolani74@gmail.com",
+                    "homepage": "http://www.mauriziocingolani.it"
+                }
+            ],
+            "description": "Widget per giocare Rock Paper Scissors Lizard Spock nella tua applicazione Yii2",
+            "keywords": [
+                "framework",
+                "lizard",
+                "paper",
+                "php",
+                "rock",
+                "scissors",
+                "spock",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-08-01 09:57:05"
         },
         {
             "name": "mauriziocingolani/yii2-fmwk-twitter",
@@ -738,12 +787,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "1d2f8519c78c557b3d28f647a6bacfad1d6720f8"
+                "reference": "10b89bf195c552cc11206fb4812815e552a092f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/1d2f8519c78c557b3d28f647a6bacfad1d6720f8",
-                "reference": "1d2f8519c78c557b3d28f647a6bacfad1d6720f8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/10b89bf195c552cc11206fb4812815e552a092f3",
+                "reference": "10b89bf195c552cc11206fb4812815e552a092f3",
                 "shasum": ""
             },
             "require": {
@@ -777,7 +826,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2015-06-24 10:53:39"
+            "time": "2015-07-30 07:07:01"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -785,12 +834,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "4487b4600525f04b5e2e8a46593f04f62a9c3446"
+                "reference": "552f9cb837b1ae0ab5e904aef7366ff191233a5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/4487b4600525f04b5e2e8a46593f04f62a9c3446",
-                "reference": "4487b4600525f04b5e2e8a46593f04f62a9c3446",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/552f9cb837b1ae0ab5e904aef7366ff191233a5a",
+                "reference": "552f9cb837b1ae0ab5e904aef7366ff191233a5a",
                 "shasum": ""
             },
             "require": {
@@ -830,7 +879,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2015-07-15 20:50:58"
+            "time": "2015-08-02 17:00:44"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -838,12 +887,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-jui.git",
-                "reference": "3d4f3d7d0e86af0e0b051a3660517f3041623ffa"
+                "reference": "9e47f6644f77a508243b60eea90d8b09a04b2eca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/3d4f3d7d0e86af0e0b051a3660517f3041623ffa",
-                "reference": "3d4f3d7d0e86af0e0b051a3660517f3041623ffa",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/9e47f6644f77a508243b60eea90d8b09a04b2eca",
+                "reference": "9e47f6644f77a508243b60eea90d8b09a04b2eca",
                 "shasum": ""
             },
             "require": {
@@ -880,7 +929,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2015-05-30 10:39:17"
+            "time": "2015-07-28 06:24:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

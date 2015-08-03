@@ -1,5 +1,9 @@
 <?php
-/* @var $this SiteController */
+/* @var $this mauriziocingolani\yii2fmwkphp\View */
+
+use mauriziocingolani\yii2fmwkrpsls\RpslsWidget;
+
+require_once Yii::$app->basePath . '/vendor/mauriziocingolani/yii2-fmwk-rpsls/RpslsWidget.php';
 ?>
 
 <h1>Coming Soon...</h1>
@@ -20,14 +24,10 @@
     con le voci riguardanti le informazioni, le richieste di chiarimento o di sviluppo che normalmente scambieresti
     via email con i colleghi del tuo team. Nomina le <span class="lb-obj"><i class="fa fa-at"></i>persone</span>
     coinvolte e gli <span class="lb-obj"><i class="fa fa-slack"></i>argomenti</span> in discussione. Una volta creato
-    il diario potrai ricercare le voci che ti interessano in base alle persone e agli argomento che sono nominati al
+    il diario potrai ricercare le voci che ti interessano in base alle persone e agli argomenti che sono nominati al
     loro interno, oppure semplicemente tramite il testo contenuto.
     In questo modo tutti potranno ritrovare rapidamente le voci che li riguardano, o che trattano gli argomenti che
     li coinvolgono, senza dover decifrare le informazioni contenute in decine e decine di email scambiate con i colleghi.
 </p>
 
-<p style="font-size: 1.5em;"></p>
-
-<p style="font-size: 1.5em;"></p>
-
-<p style="font-size: 1.5em;"></p>
+<?= RpslsWidget::widget(); ?>
