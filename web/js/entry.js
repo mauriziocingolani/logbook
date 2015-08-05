@@ -12,4 +12,9 @@ $(function () {
         source: values,
         trigger: "@"
     });
+    $('#entry-entrytext').triggeredAutocomplete({
+        hidden: '#hidden_inputbox_2',
+        source: values,
+        trigger: "#"
+    });
 });

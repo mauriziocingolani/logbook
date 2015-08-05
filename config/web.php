@@ -15,7 +15,7 @@ $config->addI18NComponent();
 $config->addUserModule();
 $config->language = 'it';
 $config->sourceLanguage = 'en';
-$config->version = 'RC1';
+$config->version = 'RC2';
 if (YII_DEBUG)
     $config->enableGii(['82.85.62.218']);
 return $config->getConfig();
