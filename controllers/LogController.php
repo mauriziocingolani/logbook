@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\components\LogbookController;
 use app\models\Entry;
+use app\modules\user\models\User;
 
 class LogController extends LogbookController {
 
@@ -30,7 +31,9 @@ class LogController extends LogbookController {
                 endif;
             endif;
         endif;
-        return $this->render('index', ['entry' => $entry]);
+        return $this->render('index', [
+                    'entry' => $entry,
+        ]);
     }
 
 }

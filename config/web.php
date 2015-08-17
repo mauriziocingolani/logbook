@@ -5,7 +5,7 @@ include '../vendor/mauriziocingolani/yii2-fmwk-php/Config.php';
 use mauriziocingolani\yii2fmwkphp\Config;
 
 $config = new Config(sha1('logbook-app'), dirname(__DIR__), 'files');
-$config->addCacheComponent();
+//$config->addCacheComponent();
 $config->addDbComponent();
 //$config->addMailComponent();
 $config->addSessionComponent(['timeout' => 14400]);

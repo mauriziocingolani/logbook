@@ -8,7 +8,7 @@ use mauriziocingolani\yii2fmwkphp\Html;
 $this->title = $this->addBreadcrumb('@Utenti');
 ?>
 
-<h1 class="lb-obj"><i class="fa fa-at"></i>Utenti</h1>
+<h1 class="lb-obj"><!--<i class="fa fa-at"></i>-->@Utenti</h1>
 
 <p>
     <?= Html::faa('plus', 'Nuovo utente', ['/utenti/nuovo'], ['class' => 'btn btn-default']); ?>

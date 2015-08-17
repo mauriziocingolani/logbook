@@ -46,7 +46,7 @@ class Entry extends ActiveRecord {
         return [
             ['EntryText', 'required', 'message' => 'Inserisci il testo della voce'],
             ['EntryText', 'checkObjects'],
-            ['ProjectID', 'safe'],
+            ['ProjectID', 'required', 'message' => 'Seleziona il progetto'],
         ];
     }
 
@@ -134,10 +134,10 @@ class Entry extends ActiveRecord {
     public function getText() {
         $text = $this->EntryText;
         foreach ($this->_users as $user) :
-            $text = preg_replace('/@' . $user->UserName . '/', '<span class="lb-obj"><i class="fa fa-at"></i>' . $user->UserName . '</span>', $text);
+            $text = preg_replace('/@' . $user->UserName . '/', '<span class="lb-obj"><!--<i class="fa fa-at"></i>-->@' . $user->UserName . '</span>', $text);
         endforeach;
         foreach ($this->_hashtags as $hashtag) :
-            $text = preg_replace('/#' . $hashtag->Slug . '/', '<span class="lb-obj"><i class="fa fa-slack"></i>' . $hashtag->Slug . '</span>', $text);
+            $text = preg_replace('/#' . $hashtag->Slug . '/', '<span class="lb-obj"><!--<i class="fa fa-slack"></i>-->#' . $hashtag->Slug . '</span>', $text);
         endforeach;
         return $text;
     }

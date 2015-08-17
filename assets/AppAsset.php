@@ -19,12 +19,13 @@ class AppAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        '//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
+        'css/font-awesome-4.4.0/css/font-awesome.min.css',
         'css/main.css',
     ];
     public $js = [
         'js/entry.js',
-        'js/triggeredAutocomplete.js',
+        'js/usersAutocomplete.js',
+        'js/hashtagsAutocomplete.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

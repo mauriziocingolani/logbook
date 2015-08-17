@@ -3,34 +3,40 @@
 namespace app\modules\user\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use app\modules\user\models\Login;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\PasswordForm;
 use app\modules\user\models\Role;
 use app\modules\user\models\UserSearch;
 use app\modules\user\models\User;
-use mauriziocingolani\yii2fmwkphp\Controller;
+use mauriziocingolani\yii2fmwkphp\Controller; 
 
-class DefaultController extends Controller {
+class DefaultController extends Controller { 
 
-    public function behaviors() {
-        return $this->accessRules([
-                    [ 'allow' => true,
-                        'roles' => ['@'],
-                        'actions' => ['logout'],
-                    ],
-                    [ 'allow' => true,
-                        'actions' => [ 'users', 'user'],
-                        'matchCallback' => function() {
-                    return Yii::$app->user->isDeveloper();
-                },
-                    ],
-                    ['allow' => true,
-                        'roles' => ['?'],
-                        'actions' => ['login', 'password'],
-                    ],
-        ]);
-    }
+//    public function behaviors() {
+//        return [
+//            'access' => [
+//                'class' => \yii\filters\AccessControl::className(),
+//                'rules' => [
+//                    ['allow' => true,
+//                        'roles' => ['@'],
+//                        'actions' => ['logout'],
+//                    ],
+//                    ['allow' => true,
+//                        'actions' => ['users', 'user'],
+//                        'matchCallback' => function() {
+//                    return Yii::$app->user->isDeveloper();
+//                },
+//                    ],
+//                    ['allow' => true,
+//                        'roles' => ['?'],
+//                        'actions' => ['login', 'password'],
+//                    ],
+//                ],
+//            ],
+//        ];
+//    }
 
     public function actionLogin() {
         if (!Yii::$app->user->isGuest)
@@ -106,6 +112,17 @@ class DefaultController extends Controller {
                     'model' => $model,
                     'name' => $name,
         ]);
+    }
+
+    /* AJAX */
+
+    public function actionList() {
+        $users = User::find()->where('BanDateTime IS NULL')->orderBy(['UserName' => SORT_ASC])->all();
+        $data = array();
+        foreach ($users as $us) :
+            $data[] = $us->UserName;
+        endforeach;
+        echo json_encode($data);
     }
 
 }

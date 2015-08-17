@@ -28,7 +28,7 @@ use yii\helpers\Url;
             'url' => Url::to(['/log']),
         ];
         $items[] = [
-            'label' => '<i class="fa fa-usd"></i>Progetti',
+            'label' => '<!--<i class="fa fa-usd"></i>-->$Progetti',
             'active' => $this->context->id == 'projects',
             'url' => Url::to(['/progetti']),
             'visible' => Yii::$app->user->isDeveloper(),
@@ -37,14 +37,14 @@ use yii\helpers\Url;
         $userSubitems[] = ['label' => 'Utente di classe <strong>' . Yii::$app->user->identity->role->Description . '</strong>'];
         $userSubitems[] = '<li class="divider"></li>';
         if (Yii::$app->user->isDeveloper()) :
-            $userSubitems[] = ['label' => '<i class="fa fa-at"></i> Utenti', 'url' => ['/utenti']];
+            $userSubitems[] = ['label' => '<!--<i class="fa fa-at"></i>-->@ Utenti', 'url' => ['/utenti']];
             $userSubitems[] = '<li class="divider"></li>';
         endif;
 //                $userSubitems[] = ['label' => '<i class="fa fa-info-circle"></i> Profilo', 'url' => ['#']];
 //                $userSubitems[] = ['label' => '<i class="fa fa-list"></i> Ruoli', 'url' => ['/utenti/ruoli']];
         $userSubitems[] = ['label' => '<i class="fa fa-power-off"></i> Logout', 'url' => Url::to(['/logout'])];
         $items[] = [
-            'label' => '<i class="fa fa-at"></i> ' . Yii::$app->user->identity->Name,
+            'label' => '<!--<i class="fa fa-at"></i>-->@ ' . Yii::$app->user->identity->Name,
             'items' => $userSubitems];
     endif;
     echo Nav::widget([

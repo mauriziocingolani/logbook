@@ -18,7 +18,7 @@ use yii\helpers\Html;
     <dt>Utente:</dt>
     <dd style="font-weight: bold;"><?php echo $username; ?></dd>
 </dl>
-<p>Se vuoi puoi effattuare il login utilizzando il tuo indirizzo email al posto del nome utente.</p>
+<p>Se vuoi puoi effettuare il login utilizzando il tuo indirizzo email al posto del nome utente.</p>
 <p style="font-style: italic;">
     Questa mail &egrave; destinata a utenti di LogBook. Se hai ricevuto questa email 
     per errore sei pregato di ignorarne il contenuto e di eliminarla.

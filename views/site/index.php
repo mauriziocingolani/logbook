@@ -20,10 +20,10 @@ require_once Yii::$app->basePath . '/vendor/mauriziocingolani/yii2-fmwk-rpsls/Rp
 
 <h3>Come funziona</h3>
 <p>
-    Crea il tuo <span class="lb-obj"><i class="fa fa-usd"></i>progetto</span>, e inizia a popolare il suo diario
+    Crea il tuo <span class="lb-obj"><!--<i class="fa fa-usd"></i>-->$progetto</span>, e inizia a popolare il suo diario
     con le voci riguardanti le informazioni, le richieste di chiarimento o di sviluppo che normalmente scambieresti
-    via email con i colleghi del tuo team. Nomina le <span class="lb-obj"><i class="fa fa-at"></i>persone</span>
-    coinvolte e gli <span class="lb-obj"><i class="fa fa-slack"></i>argomenti</span> in discussione. Una volta creato
+    via email con i colleghi del tuo team. Nomina le <span class="lb-obj"><!--<i class="fa fa-at"></i>-->@persone</span>
+    coinvolte e gli <span class="lb-obj"><!--<i class="fa fa-slack"></i>-->#argomenti</span> in discussione. Una volta creato
     il diario potrai ricercare le voci che ti interessano in base alle persone e agli argomenti che sono nominati al
     loro interno, oppure semplicemente tramite il testo contenuto.
     In questo modo tutti potranno ritrovare rapidamente le voci che li riguardano, o che trattano gli argomenti che

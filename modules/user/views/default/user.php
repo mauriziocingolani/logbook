@@ -15,7 +15,7 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo utente' : 'Uten
     <?php if ($model->isNewRecord) : ?>
         Nuovo utente
     <?php else : ?>
-        Utente <span class="lb-obj"><i class="fa fa-at"></i><?= $model->UserName; ?></span>
+        Utente <span class="lb-obj"><!--<i class="fa fa-at"></i>-->@<?= $model->UserName; ?></span>
     <?php endif; ?>
 </h1>
 

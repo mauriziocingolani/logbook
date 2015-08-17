@@ -1,20 +1,19 @@
 var start = /@/ig; // @ Match
 var word = /@(^[a-z]{1}[a-z0-9_]+[a-z0-9]{1}$)/ig; //@x_abc1234 Match
-
+var projectid;
+var users;
+var hashtags;
 $(function () {
-    var options = $('#users option');
-    var values = $.map(options, function (option) {
-        return option.value;
+    $.ajax('user/default/list', {
+        dataType: 'json',
+        success: function (json) {
+            $('#entry-entrytext').usersAutocomplete({
+                source: json,
+                hidden: '#hidden_users_inputbox',
+            });
+        }
     });
-    console.log(values);
-    $('#entry-entrytext').triggeredAutocomplete({
-        hidden: '#hidden_inputbox',
-        source: values,
-        trigger: "@"
-    });
-    $('#entry-entrytext').triggeredAutocomplete({
-        hidden: '#hidden_inputbox_2',
-        source: values,
-        trigger: "#"
+    $('#entry-entrytext').hashtagsAutocomplete({
+        hidden: '#hidden_hashtags_inputbox',
     });
 });

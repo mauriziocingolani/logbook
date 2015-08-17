@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\HttpException;
 use app\components\LogbookController;
 use app\models\Hashtag;
@@ -13,6 +14,9 @@ class ProjectsController extends LogbookController {
 
     public function behaviors() {
         return $this->accessRules([
+                    ['allow' => true,
+                        'actions' => ['hashtags'],
+                    ],
                     ['allow' => true,
                         'matchCallback' => function($rule, $action) {
                             return Yii::$app->user->isDeveloper();
@@ -75,6 +79,14 @@ class ProjectsController extends LogbookController {
                     'name' => $name,
                     'hashtag' => $hashtag,
         ]);
+    }
+
+    /* ===  Ajax === */
+
+    public function actionHashtags() {
+        echo json_encode(ArrayHelper::getColumn(Hashtag::find()->
+                                where('ProjectID=:projectid', [':projectid' => Yii::$app->getRequest()->get('ProjectID')])->
+                                orderBy(['Slug' => SORT_ASC])->all(), 'Slug'));
     }
 
 }
