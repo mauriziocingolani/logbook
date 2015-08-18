@@ -157,7 +157,6 @@
         // Slightly altered the default ajax call to stop querying after the search produced no results.
         // This is to prevent unnecessary querying.
         _initSource: function () {
-            console.log(this.options.source, this.source);
             var self = this, array, url;
             if ($.isArray(this.options.source)) {
                 array = this.options.source;

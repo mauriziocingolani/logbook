@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
-use app\components\LogbookController;
+use yii\web\Controller;
 
-class SiteController extends LogbookController {
+//use app\components\LogbookController;
+
+class SiteController extends Controller {
 
     public function actions() {
         return [
@@ -12,6 +14,18 @@ class SiteController extends LogbookController {
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [['allow' => true]],
+            ],
+        ];
+//        return $this->accessRules([
+//                    ['allow' => true]
+//        ]);
     }
 
     public function actionIndex() {

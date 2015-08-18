@@ -10,9 +10,12 @@ use app\modules\user\models\User;
 class LogController extends LogbookController {
 
     public function behaviors() {
-        return $this->accessRules([
-                    ['allow' => true, 'roles' => ['@']],
-        ]);
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [['allow' => true]],
+            ],
+        ];
     }
 
     public function actionIndex() {
@@ -36,4 +39,12 @@ class LogController extends LogbookController {
         ]);
     }
 
+    public function actionUsers() {
+        $users = User::find()->where('BanDateTime IS NULL')->orderBy(['UserName' => SORT_ASC])->all();
+        $data = array();
+        foreach ($users as $us) :
+            $data[] = $us->UserName;
+        endforeach;
+        echo json_encode($data);
+    }
 }

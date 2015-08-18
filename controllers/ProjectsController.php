@@ -13,7 +13,10 @@ use app\models\ProjectSearch;
 class ProjectsController extends LogbookController {
 
     public function behaviors() {
-        return $this->accessRules([
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
                     ['allow' => true,
                         'actions' => ['hashtags'],
                     ],
@@ -23,7 +26,9 @@ class ProjectsController extends LogbookController {
                         },
                     ],
                     ['allow' => false],
-        ]);
+                ],
+            ],
+        ];
     }
 
     public function actionIndex() {

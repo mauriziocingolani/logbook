@@ -4,7 +4,7 @@ var projectid;
 var users;
 var hashtags;
 $(function () {
-    $.ajax('user/default/list', {
+    $.ajax('log/users', {
         dataType: 'json',
         success: function (json) {
             $('#entry-entrytext').usersAutocomplete({

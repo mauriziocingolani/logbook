@@ -2,8 +2,10 @@
 
 namespace app\components;
 
-use mauriziocingolani\yii2fmwkphp\Controller;
+use yii\web\Controller;
 
-class LogbookController extends \mauriziocingolani\yii2fmwkphp\Controller {
+//use mauriziocingolani\yii2fmwkphp\Controller;
+
+class LogbookController extends Controller {
     
 }
