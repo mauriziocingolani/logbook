@@ -5,7 +5,7 @@ body > .container {
   padding-top: 60px; }
 
 body .wrap > nav {
-  opacity: 0.1; }
+  opacity: 1.1; }
 
 body > footer {
   border-top: 1px solid #bababa;
@@ -48,5 +48,13 @@ p.created {
   color: #bababa;
   font-size: 12px;
   font-style: italic; }
+
+/* RPSLS */
+#rpsls-modal .win {
+  color: green; }
+#rpsls-modal .lose {
+  color: red; }
+#rpsls-modal i.fa {
+  font-size: 2em; }
 
 /*# sourceMappingURL=main.css.map */

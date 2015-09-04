@@ -40,4 +40,12 @@ class SiteController extends Controller {
         return $this->render('offline');
     }
 
+    public function actionLicenza() {
+        return $this->render('license/it');
+    }
+
+    public function actionLicense() {
+        return $this->render('license/en');
+    }
+
 }

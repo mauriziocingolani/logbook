@@ -6,7 +6,7 @@ body > .container {
 }
 
 body .wrap > nav {
-    opacity: 0.1;
+    opacity: 1.1;
 }
 
 body > footer {
@@ -61,4 +61,13 @@ p.created {
     color: #bababa;
     font-size: 12px;
     font-style: italic;
+}
+
+/* RPSLS */
+#rpsls-modal {
+    .win {color: green;}
+    .lose {color: red;}
+    i.fa {
+        font-size: 2em;
+    }
 }

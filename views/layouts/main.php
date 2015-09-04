@@ -40,8 +40,19 @@ AppAsset::register($this);
         <footer>
             <div class="container">
                 <p class="pull-left">
-                    <i class="fa fa-bookmark-o" style="font-size: 24px;"></i> <span style="font-size: 18px;">LogBook</span><br />
+                    <i class="fa fa-bookmark-o" style="font-size: 30px;"></i> <span style="font-size: 24px;"><?= Yii::$app->name; ?></span>
+                    <small>&copy;<?= Yii::$app->params['app']['year']; ?></small>
+                    <br />
                     Versione: <?= Yii::$app->version; ?>
+                    <?php if (!Yii::$app->user->isGuest) : ?>
+                        <br />
+                        <small>
+                            Powered by <?= Html::a('Yii ' . Yii::getVersion(), 'http://www.yiiframework.com/doc-2.0/index.html', ['target' => 'blank']); ?>
+                            (php: <?= PHP_VERSION; ?>)
+                        </small>
+                    <?php endif; ?>
+                    <br />
+                    <small><?= Html::a('Licenza', ['/licenza']); ?></small>
                 </p>
                 <p class="social pull-right">
                     Sviluppo web: <?= \yii\helpers\Html::a('Maurizio Cingolani', 'http://www.mauriziocingolani.it', ['target' => 'blank']); ?><br />

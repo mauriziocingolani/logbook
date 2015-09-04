@@ -30,4 +30,8 @@ require_once Yii::$app->basePath . '/vendor/mauriziocingolani/yii2-fmwk-rpsls/Rp
     li coinvolgono, senza dover decifrare le informazioni contenute in decine e decine di email scambiate con i colleghi.
 </p>
 
+<hr />
+
+Gioca a <a href="" data-toggle="modal" data-target="#rpsls-modal">Rock-Paper-Scissors-Lizard-Spock</a>
+
 <?= RpslsWidget::widget(); ?>

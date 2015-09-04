@@ -14,6 +14,7 @@ $config->addUserComponent();
 $config->addI18NComponent();
 $config->addUserModule();
 $config->language = 'it';
+$config->name = 'LogBook';
 $config->sourceLanguage = 'en';
 $config->version = 'RC2';
 if (YII_DEBUG)
