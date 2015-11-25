@@ -19,7 +19,6 @@ class AppAsset extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/font-awesome-4.4.0/css/font-awesome.min.css',
         'css/main.css',
     ];
     public $js = [
@@ -31,6 +30,7 @@ class AppAsset extends AssetBundle {
         'yii\web\YiiAsset',
         'yii\jui\JuiAsset',
         'yii\bootstrap\BootstrapAsset',
+        '\rmrevin\yii\fontawesome\AssetBundle',
     ];
 
 }

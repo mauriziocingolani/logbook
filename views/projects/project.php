@@ -18,7 +18,7 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
     <?php if ($model->isNewRecord) : ?>
         <?= $name; ?>
     <?php else : ?>
-        Progetto <span class="lb-obj"><!--<i class="fa fa-usd"></i>-->$<?= $name; ?></span>
+            Progetto <span class="lb-obj"><!--<i class="fa fa-usd"></i>-->$<?= $name; ?></span>
     <?php endif; ?>
 </h1>
 
@@ -92,8 +92,7 @@ $form = ActiveForm::begin([
                 <a href="" title="Clicca per eliminare l'argomento" onclick="submitDeleteForm(<?= $hash->HashtagID; ?>);
                         return false;"><i class="fa fa-times"></i></a>
             </form>
-            <?php Alert::end();
-            ?>
+            <?php Alert::end(); ?>
         <?php endforeach; ?>
 
     <?php else : ?>

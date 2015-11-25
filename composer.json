@@ -21,7 +21,8 @@
         "yiisoft/yii2-jui": "*",
         "mauriziocingolani/yii2-fmwk-php": "1.0.*",
         "mauriziocingolani/yii2-fmwk-twitter": "1.0.*",
-        "mauriziocingolani/yii2-fmwk-rpsls": "0.9.*"
+        "mauriziocingolani/yii2-fmwk-rpsls": "0.9.*",
+        "rmrevin/yii2-fontawesome": "*"
     },
     "config": {
         "process-timeout": 1800
