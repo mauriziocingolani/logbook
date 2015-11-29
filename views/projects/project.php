@@ -18,7 +18,7 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
     <?php if ($model->isNewRecord) : ?>
         <?= $name; ?>
     <?php else : ?>
-            Progetto <span class="lb-obj"><!--<i class="fa fa-usd"></i>-->$<?= $name; ?></span>
+            Progetto <span class="lb-obj"><i class="fa fa-usd"></i><?= $name; ?></span>
     <?php endif; ?>
 </h1>
 
@@ -26,10 +26,10 @@ $this->title = $this->addBreadcrumb($model->isNewRecord ? 'Nuovo progetto' : 'Pr
 <?php if (!$model->isNewRecord) : ?>
     <p class="created">
         Creato il <?= date('d-m-Y', strtotime($model->Created)); ?> 
-        da <strong><!--<i class="fa fa-at"></i>-->@<?= $model->creator->UserName; ?></strong>
+        da <strong><i class="fa fa-at"></i><?= $model->creator->UserName; ?></strong>
         <?php if ($model->Updated) : ?>
             - Aggiornato il <?= date('d-m-Y', strtotime($model->Updated)); ?> 
-            da <strong><!--<i class="fa fa-at"></i>-->@<?= $model->updater->UserName; ?></strong>
+            da <strong><i class="fa fa-at"></i><?= $model->updater->UserName; ?></strong>
         <?php endif; ?>
     </p>
 <?php endif; ?>
@@ -62,7 +62,7 @@ $form = ActiveForm::begin([
     <hr />
 
     <!-- ARGOMENTI -->
-    <h3 class="lb-obj"><!--<i class="fa fa-slack"></i>-->#Argomenti</h3>
+    <h3 class="lb-obj"><i class="fa fa-hashtag"></i>Argomenti</h3>
 
     <?php if (count($model->hashtags) > 0) : ?>
 

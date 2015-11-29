@@ -7,7 +7,7 @@ use mauriziocingolani\yii2fmwkphp\Html;
 $this->title = $this->addBreadcrumb('Progetti');
 ?>
 
-<h1 class="lb-obj"><!--<i class="fa fa-usd"></i>-->$Progetti</h1>
+<h1 class="lb-obj"><i class="fa fa-usd"></i>Progetti</h1>
 
 <p>
     <?= Html::faa('plus', 'Nuovo progetto', ['/progetti/nuovo'], ['class' => 'btn btn-default']); ?>
