@@ -1,11 +1,12 @@
 <?php
-/* @var $this \yii\web\View */
+/* @var $this mauriziocingolani\yii2fmwkphp\View */
 /* @var $model app\modules\user\models\LoginForm */
 
 use yii\widgets\ActiveForm;
 use mauriziocingolani\yii2fmwkphp\Html;
 
 $this->title = 'Login';
+$this->registerShowPasswordScript();
 ?>
 
 <h1>Login</h1>
@@ -29,12 +30,19 @@ $this->title = 'Login';
         <?= $form->field($model, 'Password')->passwordInput() ?>
 
         <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <?= Html::checkbox('reveal-password', false, ['id' => 'reveal-password']) ?> <?= Html::label('Mostra password', 'reveal-password', ['style' => 'font-weight: normal;']) ?>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary']) ?> 
                 <p style="margin-top: 10px;"><?= Html::a('Dimenticato la password?', ['/password-dimenticata']); ?></p>
             </div>
         </div>
-        
+
         <?php ActiveForm::end() ?>
 
     </div>
