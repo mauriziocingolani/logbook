@@ -4,12 +4,20 @@
 
 use yii\widgets\ActiveForm;
 use mauriziocingolani\yii2fmwkphp\Html;
+use rmrevin\yii\fontawesome\FA;
 
 $this->title = 'Login';
 $this->registerShowPasswordScript();
 ?>
 
 <h1>Login</h1>
+
+<?php if (YII_LOCKED) : ?>
+    <div class="alert alert-warning" style="font-size: 20px;">
+        <?= FA::icon('lock'); ?>
+        L'accesso al gestionale &egrave; mentaneamente bloccato per manutenzione. Attendere prego...
+    </div>
+<?php endif; ?>
 
 <div class="row">
 

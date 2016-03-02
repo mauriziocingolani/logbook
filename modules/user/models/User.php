@@ -154,12 +154,17 @@ class User extends NamedActiveRecord implements IdentityInterface {
     /**
      * Ricerca un utente in base al nome utente o all'indirizzo email.
      * Se il nome utente esiste restituisce l'oggetto User corrispondente.
+     * La variabile YII_LOCKED (definita nel file web/constants.php) inibisce
+     * l'accesso agli utenti diversi da UserID=1.
      * @param string $username Nome utente o inrdirizzo email da cercare
      * @return \static Oggetto User oppure null
      */
     public static function FindByUserName($username) {
-        return static::find()->
-                        where(['UserName' => $username])->
+        $query = static::find();
+        $where = ['UserName' => $username, 'BanDateTime' => null];
+        if (YII_LOCKED)
+            $where['UserID'] = 1;
+        return $query->where($where)->
                         orWhere(['Email' => $username])->one();
     }
 
