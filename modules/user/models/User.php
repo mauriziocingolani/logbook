@@ -161,11 +161,12 @@ class User extends NamedActiveRecord implements IdentityInterface {
      */
     public static function FindByUserName($username) {
         $query = static::find();
-        $where = ['UserName' => $username, 'BanDateTime' => null];
+        $query->where(['BanDateTime' => null]);
+        $query->andWhere('UserName=:username OR Email=:username');
+        $query->addParams([':username' => $username]);
         if (YII_LOCKED)
-            $where['UserID'] = 1;
-        return $query->where($where)->
-                        orWhere(['Email' => $username])->one();
+            $query->andWhere(['UserID' => 1]);
+        return $query->one();
     }
 
     /* Ajax */
