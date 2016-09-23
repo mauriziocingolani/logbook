@@ -52,8 +52,10 @@ class Login extends ActiveRecord {
                     'SessionID' => Yii::$app->session->id,
                     'UserID' => $userid,
                 ])->one();
-        $login->Logout = new Expression('NOW()');
-        $login->save();
+        if ($login) :
+            $login->Logout = new Expression('NOW()');
+            $login->save();
+        endif;
     }
 
 }

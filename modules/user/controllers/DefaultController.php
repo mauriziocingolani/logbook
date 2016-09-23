@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use Yii;
+use yii\authclient\AuthAction;
 use app\modules\user\models\Login;
 use app\modules\user\models\LoginForm;
 use app\modules\user\models\PasswordForm;
@@ -13,11 +14,21 @@ use mauriziocingolani\yii2fmwkphp\Controller;
 
 class DefaultController extends Controller {
 
+    public function actions() {
+        return [
+            'auth' => [
+                'class' => 'yii\authclient\AuthAction',
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
+        ];
+    }
+
     public function behaviors() {
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
                 'rules' => [
+                    ['allow' => true],
                     ['allow' => true,
                         'roles' => ['@'],
                         'actions' => ['logout'],
@@ -111,6 +122,27 @@ class DefaultController extends Controller {
                     'model' => $model,
                     'name' => $name,
         ]);
+    }
+
+    public function onAuthSuccess(\yii\authclient\ClientInterface $client) {
+        $attributes = $client->getUserAttributes();
+        $auth = \app\models\Auth::find()->with('user')->where([
+                    'Source' => $client->getId(),
+                    'SourceID' => $attributes['id'],
+                ])->one();
+        if (Yii::$app->user->isGuest) :
+            if ($auth) : # utente già presente: login
+                $user = $auth->user;
+                Yii::$app->user->login($user, 3600 * 24);
+            else :
+                $auth = new \app\models\Auth([
+                    'UserID' => 1,
+                    'Source' => $client->getId(),
+                    'SourceID' => $attributes['id'],
+                ]);
+                $auth->save();
+            endif;
+        endif;
     }
 
 }

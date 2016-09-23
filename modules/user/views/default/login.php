@@ -63,15 +63,15 @@ $this->registerShowPasswordScript();
                 <p>Login via social networks</p>
 
                 <p>
-                    <a href="/user/default/auth?authclient=facebook" class="btn btn-default btn-block"><i class="fa fa-facebook" style="width: 20px;"></i> Facebook</a>
+                    <a href="/user/default/auth?authclient=facebook" class="btn btn-default btn-block"><i class="fa fa-fw fa-facebook" style="color: #3b5998;"></i> Facebook</a>
                 </p>
 
                 <p>
-                    <a href="/user/default/auth?authclient=twitter" class="btn btn-default btn-block"><i class="fa fa-twitter" style="width: 20px;"></i> Twitter</a>
+                    <a href="/user/default/auth?authclient=twitter" class="btn btn-default btn-block"><i class="fa fa-fw fa-twitter" style="color: #1da1f2"></i> Twitter</a>
                 </p>
 
                 <p>
-                    <a href="/user/default/auth?authclient=linkedin" class="btn btn-default btn-block"><i class="fa fa-linkedin" style="width: 20px;"></i> Linkedin</a>
+                    <a href="/user/default/auth?authclient=linkedin" class="btn btn-default btn-block"><i class="fa fa-fw fa-linkedin" style="color: #0077b5;"></i> Linkedin</a>
                 </p>
             </div> 
 
